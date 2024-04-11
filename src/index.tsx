@@ -2,14 +2,16 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import './index.css';
 import reportWebVitals from './reportWebVitals';
-import Roteador from './componentes/roteador';
+import AppRouter from './router/appRouter';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <Roteador />
+    <div className='flex flex-col items-center justify-center bg-neutral-100  w-full min-h-screen'>
+      <AppRouter />
+    </div>
   </React.StrictMode>
 );
 

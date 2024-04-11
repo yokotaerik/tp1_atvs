@@ -9,20 +9,31 @@ export default class FormularioCadastroCliente extends Component<props> {
     render() {
         let tema = this.props.tema
         return (
-            <div className="container-fluid">
-                <form>
-                    <div className="input-group mb-3">
-                        <input type="text" className="form-control" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" />
+            <div>
+                <form className="flex flex-col gap-3 justify-center items-center bg-neutral-300 p-10 flex-wrap">
+                    <div>
+                        <input type="text" placeholder="Nome" aria-label="Nome" aria-describedby="basic-addon1" />
                     </div>
-                    <div className="input-group mb-3">
-                        <input type="text" className="form-control" placeholder="Nome social" aria-label="Nome social" aria-describedby="basic-addon1" />
+                    <div>
+                        <input type="text" placeholder="Nome social" aria-label="Nome social" aria-describedby="basic-addon1" />
                     </div>
-                    <div className="input-group mb-3">
-                        <span className="input-group-text" id="basic-addon1" style={{ background: tema }}>@</span>
-                        <input type="text" className="form-control" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1" />
+                    <div>
+                        <span style={{ background: tema }}>@</span>
+                        <input type="text" placeholder="E-mail" aria-label="E-mail" aria-describedby="basic-addon1" />
                     </div>
-                    <div className="input-group mb-3">
-                        <button className="btn btn-outline-secondary" type="button" style={{ background: tema }}>Cadastrar</button>
+                    <div>
+                        <input type="text" placeholder="CPF" />
+                        <span>Data de emissao</span>
+                        <input type="date" placeholder="Data de emissão do CPF" />
+                    </div>
+                    <div>
+                        <input type="text" placeholder="RG" />
+                        <span>Data de emissao</span>
+                        <input type="date" placeholder="Data de emissão do RG" />
+
+                    </div>
+                    <div>
+                        <button type="button" style={{ background: tema }}>Cadastrar</button>
                     </div>
                 </form>
             </div>

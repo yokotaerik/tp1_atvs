@@ -6,7 +6,6 @@ import "bootstrap/dist/js/bootstrap.bundle.min";
 type props = {
     tema: string,
     botoes: string[],
-    seletorView: Function
 }
 
 export default class BarraNavegacao extends Component<props>{
@@ -21,8 +20,8 @@ export default class BarraNavegacao extends Component<props>{
             return <></>
         } else {
             let lista = this.props.botoes.map(valor =>
-                <li key={valor} className="nav-item">
-                    <a className="nav-link" href="#" onClick={(e) => this.props.seletorView(valor, e)}>{valor}</a>
+                <li key={valor} className="">
+                    <a className="" href={`${valor}`}>{valor}</a>
                 </li>
             )
             return lista
