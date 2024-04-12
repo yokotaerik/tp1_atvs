@@ -1,15 +1,17 @@
-import React from 'react';
-import ReactDOM from 'react-dom/client';
-import './index.css';
-import reportWebVitals from './reportWebVitals';
-import AppRouter from './router/appRouter';
+import React from "react";
+import ReactDOM from "react-dom/client";
+import "./index.css";
+import reportWebVitals from "./reportWebVitals";
+import AppRouter from "./router/appRouter";
+import BarraNavegacao from "./componentes/barraNavegacao";
 
 const root = ReactDOM.createRoot(
-  document.getElementById('root') as HTMLElement
+  document.getElementById("root") as HTMLElement
 );
 root.render(
   <React.StrictMode>
-    <div className='flex flex-col items-center justify-center bg-neutral-100  w-full min-h-screen'>
+    <BarraNavegacao tema={"#31321"} />
+    <div className="flex flex-col items-center bg-neutral-100  w-full min-h-screen">
       <AppRouter />
     </div>
   </React.StrictMode>
