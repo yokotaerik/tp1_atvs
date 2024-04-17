@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
-export default class FormularioCadastroCliente extends Component {
+export default class FormularioEditarCliente extends Component {
   render() {
     return (
       <div>
-        <h1 className="text-6xl font-bold m-8">Cadastro de cliente</h1>
+        <h1 className="text-6xl font-bold m-8">Editar cliente</h1>
         <form className="flex flex-col w-full gap-4 p-4 bg-neutral-200 rounded-md mt-4 ">
           <div>
             <label htmlFor="nome">Nome</label>
@@ -13,6 +13,7 @@ export default class FormularioCadastroCliente extends Component {
               type="text"
               id="nome"
               placeholder="Nome"
+              value={"Erik Camara Yokota"}
             />
           </div>
           <div>
@@ -22,6 +23,7 @@ export default class FormularioCadastroCliente extends Component {
               type="text"
               id="nomeSocial"
               placeholder="Nome social"
+              value={"Toyota"}
             />
           </div>
           <div>
@@ -31,6 +33,7 @@ export default class FormularioCadastroCliente extends Component {
               type="text"
               id="email"
               placeholder="E-mail"
+              value={"erik@email.com"}
             />
           </div>
           <div className="flex items-center gap-2">
@@ -41,6 +44,7 @@ export default class FormularioCadastroCliente extends Component {
                 type="text"
                 id="cpf"
                 placeholder="CPF"
+                value={"123.456.789-11"}
               />
             </div>
             <div>
@@ -50,6 +54,7 @@ export default class FormularioCadastroCliente extends Component {
                 type="date"
                 id="dataEmissaoCpf"
                 placeholder="Data de emissão do CPF"
+                value={"1999-12-12"}
               />
             </div>
           </div>
@@ -60,6 +65,7 @@ export default class FormularioCadastroCliente extends Component {
                 className="w-full rounded-md p-2"
                 type="text"
                 placeholder="RG"
+                value={"53.125.810-5"}
               />
             </div>
             <div className="flex gap-2 items-end">
@@ -82,6 +88,7 @@ export default class FormularioCadastroCliente extends Component {
                   className="w-full rounded-md p-2"
                   type="text"
                   placeholder="(ddd) 99999-9999"
+                  value={"(11) 99999-9999"}
                 />
               </div>
               <button className="rounded-md p-2 bg-white">+</button>
@@ -92,7 +99,7 @@ export default class FormularioCadastroCliente extends Component {
               type="button"
               className="bg-blue-400 p-2 w-full rounded-md text-2xl font-bold text-white"
             >
-              Cadastrar cliente
+              Salvar
             </button>
           </div>
         </form>

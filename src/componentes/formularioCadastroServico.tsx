@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-export default class FormularioProdutoServico extends Component {
+export default class FormularioCadastroServico extends Component {
   render() {
     return (
       <div>

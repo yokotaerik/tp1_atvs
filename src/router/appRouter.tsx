@@ -1,56 +1,54 @@
 import React from "react";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../componentes/home";
 import FormularioCadastroCliente from "../componentes/formularioCadastroCliente";
-import ClienteFuncoes from "../componentes/clienteFuncoes";
-import ProdutosFuncoes from "../componentes/produtosFuncoes";
-import FormularioProdutoCliente from "../componentes/formularioCadastroProduto";
-import FormularioProdutoServico from "../componentes/formularioCadastroServico";
-import ServicoFuncoes from "../componentes/servicosFuncoes";
+import Clientes from "../pages/clientes";
+import Produtos from "../pages/produtos";
+import FormularioCadastroProduto from "../componentes/formularioCadastroProduto";
+import Servico from "../pages/servico";
+import FormularioCadastroServico from "../componentes/formularioCadastroServico";
+import Erik from "../pages/erik";
+import FormularioEditarCliente from "../pages/editarCliente";
+import FormularioEditarServico from "../pages/editarServico";
+import FormularioEditarProduto from "../pages/editarProduto";
 
 class AppRouter extends React.Component {
-  router: any;
-  constructor(props: {} | Readonly<{}>) {
-    super(props);
-
-    this.router = createBrowserRouter([
-      {
-        path: "/",
-        element: <Home tema="(255,0,255)" />,
-      },
-      {
-        path: "/cadastrar_cliente",
-        element: <FormularioCadastroCliente tema="(255,0,255)" />,
-      },
-      // {
-      //     path: "/editar_cliente",
-      //     element: <Home tema='(255,0,255)'/>
-      // },
-      {
-        path: "/clientes",
-        element: <ClienteFuncoes tema="(255,0,255)" />,
-      },
-      {
-        path: "/produtos",
-        element: <ProdutosFuncoes />,
-      },
-      {
-        path: "/cadastrar_produto",
-        element: <FormularioProdutoCliente />,
-      },
-      {
-        path: "/servicos",
-        element: <ServicoFuncoes />,
-      },
-      {
-        path: "/cadastrar_servico",
-        element: <FormularioProdutoServico/>
-      }
-    ]);
-  }
-
   render() {
-    return <RouterProvider router={this.router} />;
+    return (
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={<Home tema="(255,0,255)" />} />
+          <Route path="/cliente" element={<Clientes tema="(255,0,255)" />} />
+          <Route path="/cliente/1" element={<Erik />} />
+          <Route
+            path="/cliente/cadastrar"
+            element={<FormularioCadastroCliente />}
+          />
+          <Route
+            path="/cliente/editar/1"
+            element={<FormularioEditarCliente />}
+          />
+          <Route path="/produto" element={<Produtos />} />
+          <Route
+            path="/produto/cadastrar"
+            element={<FormularioCadastroProduto />}
+          />
+          <Route
+            path="/produto/editar/1"
+            element={<FormularioEditarProduto />}
+          />
+          <Route path="/servico" element={<Servico />} />
+          <Route
+            path="/servico/cadastrar"
+            element={<FormularioCadastroServico />}
+          />
+          <Route
+            path="/servico/editar/1"
+            element={<FormularioEditarServico />}
+          />
+        </Routes>
+      </BrowserRouter>
+    );
   }
 }
 
