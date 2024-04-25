@@ -46,7 +46,12 @@ export default class Erik extends Component {
           rg={this.cliente.rg}
           telefone={this.cliente.telefone}
         />
-        <h3 className="text-4xl font-bold">Pets do cliente</h3>
+        <div className="flex justify-between items-center">
+          <h3 className="text-4xl font-bold">Pets do cliente</h3>
+          <a href="/pet/cadastrar/1">
+            <button className="bg-blue-400 p-2 rounded-md text-xl font-bold text-white">Adicionar pet </button>
+          </a>
+        </div>
         {this.pets.map((pet, index) => {
           return (
             <PetInfo

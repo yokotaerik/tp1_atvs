@@ -11,6 +11,7 @@ import Erik from "../pages/erik";
 import FormularioEditarCliente from "../pages/editarCliente";
 import FormularioEditarServico from "../pages/editarServico";
 import FormularioEditarProduto from "../pages/editarProduto";
+import FormularioCadastrarPet from "../pages/cadastrarPet";
 
 class AppRouter extends React.Component {
   render() {
@@ -28,6 +29,7 @@ class AppRouter extends React.Component {
             path="/cliente/editar/1"
             element={<FormularioEditarCliente />}
           />
+          <Route path="/pet/cadastrar/1" element={<FormularioCadastrarPet />} />
           <Route path="/produto" element={<Produtos />} />
           <Route
             path="/produto/cadastrar"
