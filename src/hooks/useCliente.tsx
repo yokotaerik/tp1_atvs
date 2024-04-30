@@ -30,8 +30,9 @@ export interface Telefone {
 const useCliente = () => {
   const [clientes, setClientes] = useState<Cliente[]>([]);
 
-  const listarTodos = () => {
-    const clientes = api.get("/cliente/clientes");
+  const listarTodos = async () => {
+    const clientes = await api.get("/cliente/clientes");
+    return clientes.data;
   };
 
   const listarUm = (id: number) => {

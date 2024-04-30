@@ -1,27 +1,11 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
-import FormularioDeCadastro from './components/clienteFormulario';
+import React from "react";
+import logo from "./logo.svg";
+import "./App.css";
+import FormularioDeCadastro from "./components/clienteFormulario";
+import AppRouter from "./Router";
 
 function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          <FormularioDeCadastro />
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+  return <AppRouter />;
 }
 
 export default App;
