@@ -1,5 +1,6 @@
-import { useState } from "react";
 import api from "../utils/api";
+import { CriarCliente } from "../pages/clienteFormulario";
+import { EditarCliente } from "../pages/formularioEditarCliente";
 
 export interface Cliente {
   id: number | null;
@@ -28,7 +29,6 @@ export interface Telefone {
 }
 
 const useCliente = () => {
-  const [clientes, setClientes] = useState<Cliente[]>([]);
 
   const listarTodos = async () => {
     const res = await fetch("http://localhost:32831/cliente/clientes").then(
@@ -46,8 +46,8 @@ const useCliente = () => {
     return res;
   };
 
-  const cadastrar = (cliente: Cliente) => {
-    fetch("/cliente/cadastrar", {
+  const cadastrar = (cliente: CriarCliente) => {
+    fetch("http://localhost:32831/cliente/cadastrar", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -62,16 +62,15 @@ const useCliente = () => {
   };
 
 
-  const editar = (id: number, cliente: Cliente) => {
+  const editar = (id: number, cliente: EditarCliente) => {
     api.put("/cliente/atualizar", cliente);
   };
 
   const excluir = (id: number) => {
-    const cliente = api.delete(`/cliente/excluir`, { data: { id } });
+    const res = api.delete(`/cliente/excluir`, { data: { id } });
   };
 
   return {
-    clientes,
     listarTodos,
     listarUm,
     cadastrar,

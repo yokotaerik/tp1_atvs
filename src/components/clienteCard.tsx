@@ -1,14 +1,24 @@
 import React from "react";
-import { Cliente } from "../hooks/useCliente";
+import useCliente, { Cliente } from "../hooks/useCliente";
+import { Link, useNavigate } from "react-router-dom";
+import api from "../utils/api";
 
 interface ClienteCardProps {
   cliente: Cliente;
   expandido: boolean;
+  deletou: () => void
 }
 
-const ClienteCard = ({ cliente, expandido }: ClienteCardProps) => {
+const ClienteCard = ({ cliente, expandido, deletou }: ClienteCardProps) => {
+  const { excluir } = useCliente();
+
+  async function handleDelete(e: any) {
+    excluir(cliente.id as number)
+    setTimeout(deletou, 500)
+  }
+
   return (
-    <div className="m-4 rounded-lg bg-gray-200">
+    <div className="m-4 rounded-lg py-2 px-4 bg-gray-200">
       <div key={cliente.id} className="flex flex-col justify-between">
         <h3 className="text-xl">{cliente.nome}</h3>
         <p>
@@ -48,6 +58,11 @@ const ClienteCard = ({ cliente, expandido }: ClienteCardProps) => {
             </ul>
           </>
         )}
+      </div>
+      <div className="flex gap-2">
+        {!expandido ? (<Link to={`/cliente/${cliente.id}`}><button className="p-1 bg-blue-500 rounded-md"> Expandir</button></Link>) : null}
+        <Link to={`/editar/${cliente.id}`}><button className="p-1 bg-yellow-500 rounded-md"> Editar</button></Link>
+        <button onClick={handleDelete} className="p-1 bg-red-500 rounded-md"> Deletar </button>
       </div>
     </div>
   );

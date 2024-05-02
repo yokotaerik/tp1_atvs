@@ -1,25 +1,35 @@
 import React, { useEffect, useState } from "react";
 import useCliente, { Cliente } from "../hooks/useCliente";
-import ListaDeClientes from "../components/listarCliente";
+import ListaDeClientes from "../components/clienteCard";
+import Layout from "../components/layout";
+import { useNavigate, useParams } from "react-router-dom";
 
 const PaginaCliente = () => {
   const { listarUm } = useCliente();
   const [cliente, setCliente] = useState<Cliente>();
+  const { id } = useParams();
+  const nav = useNavigate();
 
+ 
   useEffect(() => {
     const fetchClientes = async () => {
-      const clienteData = await listarUm(1);
-      setCliente(clienteData as unknown as Cliente);
+      const clienteData = await listarUm(Number(id));
+      setCliente(clienteData);
     };
 
     fetchClientes();
   }, []);
 
+  const voltarPraHome = () =>{
+    nav("/")
+  }
+
+  
+
   return (
-    <div>
-      <h1>Cliente: </h1>
-      {cliente && <ListaDeClientes expandido={true} cliente={cliente} />}
-    </div>
+    <Layout>
+      {cliente && <ListaDeClientes expandido={true} cliente={cliente} deletou={voltarPraHome}/>}
+    </Layout>
   );
 };
 
