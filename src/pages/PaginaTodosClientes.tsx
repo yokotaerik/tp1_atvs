@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 import useCliente, { Cliente } from "../hooks/useCliente";
 import ListaDeClientes from "../components/listarCliente";
+import ClienteCard from "../components/listarCliente";
 
-const Home = () => {
+const TodosClientes = () => {
   const { listarTodos } = useCliente();
   const [clientes, setClientes] = useState<Cliente[]>([]);
 
@@ -17,10 +18,10 @@ const Home = () => {
 
   return (
     <div>
-      <h1>Lista de Clientes</h1>
-      <ListaDeClientes clientes={clientes} />
+      <h1>Lista de Clientes</h1>  
+      {clientes.length > 0 && clientes.map((cliente) => <ClienteCard expandido={false} cliente={cliente} />)}
     </div>
   );
 };
 
-export default Home;
+export default TodosClientes;

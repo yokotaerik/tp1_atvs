@@ -1,53 +1,56 @@
 import React from "react";
 import { Cliente } from "../hooks/useCliente";
 
-interface ListaDeClientesProps {
-  clientes: Cliente[]; // Lista de clientes
+interface ClienteCardProps {
+  cliente: Cliente;
+  expandido: boolean;
 }
 
-const ListaDeClientes = ({ clientes }: ListaDeClientesProps) => {
+const ClienteCard = ({ cliente, expandido }: ClienteCardProps) => {
   return (
-    <div>
-      {clientes.map((cliente) => (
-        <div key={cliente.id}>
-          <h3>{cliente.nome}</h3>
-          <p>
-            <strong>Nome Social:</strong> {cliente.nomeSocial}
-          </p>
-          <p>
-            <strong>Email:</strong> {cliente.email}
-          </p>
-          <p>
-            <strong>Endereço:</strong>
-          </p>
-          <p>
-            {cliente.endereco.rua}, {cliente.endereco.numero}
-          </p>
-          <p>
-            {cliente.endereco.bairro}, {cliente.endereco.cidade},{" "}
-            {cliente.endereco.estado}
-          </p>
-          <p>{cliente.endereco.codigoPostal}</p>
-          {cliente.endereco.informacoesAdicionais && (
+    <div className="m-4 rounded-lg bg-gray-200">
+      <div key={cliente.id} className="flex flex-col justify-between">
+        <h3 className="text-xl">{cliente.nome}</h3>
+        <p>
+          <strong>Nome Social:</strong> {cliente.nomeSocial}
+        </p>
+        {/* Verifica se o cliente está expandido */}
+        {expandido && (
+          <>
             <p>
-              <strong>Informações Adicionais:</strong>{" "}
-              {cliente.endereco.informacoesAdicionais}
+              <strong>Email:</strong> {cliente.email}
             </p>
-          )}
-          <p>
-            <strong>Telefones:</strong>
-          </p>
-          <ul>
-            {cliente.telefones.map((telefone) => (
-              <li key={telefone.id}>
-                {telefone.ddd} {telefone.numero}
-              </li>
-            ))}
-          </ul>
-        </div>
-      ))}
+            <p>
+              <strong>Endereço:</strong>
+            </p>
+            <p>
+              {cliente.endereco.rua}, {cliente.endereco.numero}
+            </p>
+            <p>
+              {cliente.endereco.bairro}, {cliente.endereco.cidade},{" "}
+              {cliente.endereco.estado} {cliente.endereco.codigoPostal}
+            </p>
+            {cliente.endereco.informacoesAdicionais && (
+              <p>
+                <strong>Informações Adicionais:</strong>{" "}
+                {cliente.endereco.informacoesAdicionais}
+              </p>
+            )}
+            <p>
+              <strong>Telefones:</strong>
+            </p>
+            <ul>
+              {cliente.telefones.map((telefone) => (
+                <li key={telefone.id}>
+                  {telefone.ddd} {telefone.numero}
+                </li>
+              ))}
+            </ul>
+          </>
+        )}
+      </div>
     </div>
   );
 };
 
-export default ListaDeClientes;
+export default ClienteCard;

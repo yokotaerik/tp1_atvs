@@ -2,7 +2,7 @@ import { useState } from "react";
 import api from "../utils/api";
 
 export interface Cliente {
-  id: number;
+  id: number | null;
   nome: string;
   nomeSocial: string;
   email: string;
@@ -31,17 +31,36 @@ const useCliente = () => {
   const [clientes, setClientes] = useState<Cliente[]>([]);
 
   const listarTodos = async () => {
-    const clientes = await api.get("/cliente/clientes");
-    return clientes.data;
+    const res = await fetch("http://localhost:32831/cliente/clientes").then(
+      (res) => res.json()
+    );
+    console.log(res);
+    return res;
   };
 
-  const listarUm = (id: number) => {
-    const cliente = api.get(`/cliente/${id}`);
+  const listarUm = async (id: number) => {
+    const res = await fetch(`http://localhost:32831/cliente/${id}`).then(
+      (res) => res.json()
+    );
+    console.log(res);
+    return res;
   };
 
   const cadastrar = (cliente: Cliente) => {
-    api.post("/cliente/cadastrar", cliente);
+    fetch("/cliente/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(cliente),
+    }).then((response) => {
+      if (!response.ok) {
+        throw new Error(`Erro ao cadastrar cliente: ${response.status}`);
+      }
+      console.log("Cliente cadastrado com sucesso.");
+    });
   };
+
 
   const editar = (id: number, cliente: Cliente) => {
     api.put("/cliente/atualizar", cliente);

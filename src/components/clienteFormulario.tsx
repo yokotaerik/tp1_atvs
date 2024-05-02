@@ -1,7 +1,8 @@
 import React, { useState } from "react";
+import useCliente from "../hooks/useCliente";
 
 interface Cliente {
-  id: number;
+  id: number | null;
   nome: string;
   nomeSocial: string;
   email: string;
@@ -26,11 +27,13 @@ interface Telefone {
   ddd: string;
 }
 
-// Componente de formulário
 const FormularioDeCadastro = () => {
+  const { cadastrar } = useCliente();
+
+
   // Estado para armazenar os dados do cliente
   const [cliente, setCliente] = useState<Cliente>({
-    id: 0,
+    id: null,
     nome: "",
     nomeSocial: "",
     email: "",
@@ -100,7 +103,7 @@ const FormularioDeCadastro = () => {
   // Função para submeter o formulário
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(cliente); // Aqui você pode fazer o que quiser com os dados do cliente
+    cadastrar(cliente);
   };
 
   return (
