@@ -1,29 +1,18 @@
 import React, { Component } from "react";
 
-export default class FormularioEditarServico extends Component {
+export default class FormularioCadastrarPet extends Component {
   render() {
     return (
       <div>
-        <h1 className="text-6xl font-bold m-8">Editar serviço</h1>
+        <h1 className="text-3xl font-bold m-8">Cadastrar pet</h1>
         <form className="flex flex-col w-full gap-4 p-4 bg-neutral-200 rounded-md mt-4 ">
           <div>
-            <label htmlFor="nome">Nome</label>
+            <label htmlFor="nome">Nome do Pet</label>
             <input
               className="w-full rounded-md p-2"
               type="text"
               id="nome"
-              placeholder="Nome"
-              value={"Banho"}
-            />
-          </div>
-          <div>
-            <label htmlFor="valor">Valor</label>
-            <input
-              className="w-full rounded-md p-2"
-              type="text"
-              id="valor"
-              placeholder="Valor"
-              value={"R$ 100,00"}
+              placeholder="Nome do pet"
             />
           </div>
           <div>
@@ -31,19 +20,26 @@ export default class FormularioEditarServico extends Component {
             <input
               className="w-full rounded-md p-2"
               type="text"
-              id="tipo"
+              id="nomeSocial"
               placeholder="Tipo"
-              value={"Porte médio"}
             />
           </div>
           <div>
-            <label htmlFor="raca">Raça</label>
+            <label htmlFor="email">Raça</label>
             <input
               className="w-full rounded-md p-2"
               type="text"
-              id="raca"
+              id="raça"
               placeholder="Raça"
-              value={"Qualquer uma"}
+            />
+          </div>
+          <div>
+            <label htmlFor="cpf">Genero</label>
+            <input
+              className="w-full rounded-md p-2"
+              type="text"
+              id="genero"
+              placeholder="Gênero"
             />
           </div>
           <div>

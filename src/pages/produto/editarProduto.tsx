@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
-export default class FormularioCadastroServico extends Component {
+export default class FormularioEditarProduto extends Component {
   render() {
     return (
       <div>
-        <h1 className="text-6xl font-bold m-8">Cadastro de serviço</h1>
+        <h1 className="text-3xl font-bold m-8">Editar produto</h1>
         <form className="flex flex-col w-full gap-4 p-4 bg-neutral-200 rounded-md mt-4 ">
           <div>
             <label htmlFor="nome">Nome</label>
@@ -13,6 +13,7 @@ export default class FormularioCadastroServico extends Component {
               type="text"
               id="nome"
               placeholder="Nome"
+              value={"Ração para cachorro"}
             />
           </div>
           <div>
@@ -22,6 +23,7 @@ export default class FormularioCadastroServico extends Component {
               type="text"
               id="valor"
               placeholder="Valor"
+              value={"R$ 100,00"}
             />
           </div>
           <div>
@@ -31,6 +33,7 @@ export default class FormularioCadastroServico extends Component {
               type="text"
               id="tipo"
               placeholder="Tipo"
+              value={"Médio porte"}
             />
           </div>
           <div>
@@ -40,6 +43,7 @@ export default class FormularioCadastroServico extends Component {
               type="text"
               id="raca"
               placeholder="Raça"
+              value={"Qualquer uma"}
             />
           </div>
           <div>
@@ -47,7 +51,7 @@ export default class FormularioCadastroServico extends Component {
               type="button"
               className="bg-blue-400 p-2 w-full rounded-md text-2xl font-bold text-white"
             >
-              Cadastrar serviço
+              Salvar
             </button>
           </div>
         </form>

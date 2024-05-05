@@ -15,10 +15,11 @@ export default class BarraNavegacao extends Component<props> {
     return (
       <>
         <nav
-          className="flex justify-between px-12 items-center bg-gradient-to-r from-blue-400 to-blue-600 p-5"
+          className="flex justify-between px-2 md:px-12 items-center bg-gradient-to-r from-blue-400 to-blue-600 p-5"
         >
-          <h1 className="font-black text-3xl text-white">PET LOVERS</h1>
-          <div className="flex gap-4 text-white text-xl font-bold">
+          <h1 className="hidden md:block font-black text-3xl text-white">PET LOVERS</h1>
+          <div className="flex gap-2 md:gap-4 text-white text-xl font-bold justify-around w-full">
+            <a href="/">Home</a>
             <a href="/cliente">Clientes</a>
             <a href="/produto">Produtos</a>
             <a href="/servico">Serviços</a>

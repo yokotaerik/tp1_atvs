@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
-export default class FormularioEditarProduto extends Component {
+export default class FormularioEditarServico extends Component {
   render() {
     return (
       <div>
-        <h1 className="text-6xl font-bold m-8">Editar produto</h1>
+        <h1 className="text-3xl font-bold m-8">Editar serviço</h1>
         <form className="flex flex-col w-full gap-4 p-4 bg-neutral-200 rounded-md mt-4 ">
           <div>
             <label htmlFor="nome">Nome</label>
@@ -13,7 +13,7 @@ export default class FormularioEditarProduto extends Component {
               type="text"
               id="nome"
               placeholder="Nome"
-              value={"Ração para cachorro"}
+              value={"Banho"}
             />
           </div>
           <div>
@@ -33,7 +33,7 @@ export default class FormularioEditarProduto extends Component {
               type="text"
               id="tipo"
               placeholder="Tipo"
-              value={"Médio porte"}
+              value={"Porte médio"}
             />
           </div>
           <div>

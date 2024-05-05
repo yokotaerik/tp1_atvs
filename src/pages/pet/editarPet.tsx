@@ -1,10 +1,10 @@
 import React, { Component } from "react";
 
-export default class FormularioCadastrarPet extends Component {
+export default class FormularioEditarPet extends Component {
   render() {
     return (
       <div>
-        <h1 className="text-6xl font-bold m-8">Editar cliente</h1>
+        <h1 className="text-3xl font-bold m-8">Editar pet</h1>
         <form className="flex flex-col w-full gap-4 p-4 bg-neutral-200 rounded-md mt-4 ">
           <div>
             <label htmlFor="nome">Nome do Pet</label>
