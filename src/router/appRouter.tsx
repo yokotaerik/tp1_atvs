@@ -11,11 +11,11 @@ import FormularioEditarCliente from "../pages/cliente/editarCliente";
 import FormularioEditarServico from "../pages/servico/editarServico";
 import FormularioEditarProduto from "../pages/produto/editarProduto";
 import FormularioCadastrarPet from "../pages/pet/cadastrarPet";
-import Erik from "../pages/cliente/erik";
 import ClientesConsumidores from "../pages/cliente/clientesConsumidores";
 import Consumir from "../pages/cliente/consumir";
 import MaisConsumidos from "../pages/maisConsumidos";
 import FormularioEditarPet from "../pages/pet/editarPet";
+import Cliente from "../pages/cliente/cliente";
 
 class AppRouter extends React.Component {
   render() {
@@ -24,7 +24,7 @@ class AppRouter extends React.Component {
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/cliente" element={<Clientes tema="(255,0,255)" />} />
-          <Route path="/cliente/1" element={<Erik />} />
+          <Route path="/cliente/1" element={<Cliente />} />
           <Route
             path="/cliente/cadastrar"
             element={<FormularioCadastroCliente />}

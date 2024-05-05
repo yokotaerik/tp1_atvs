@@ -58,7 +58,7 @@ export default class FormularioCadastroCliente extends Component<{}, State> {
     return (
       <div className="w-full md:w-2/3 lg:w-1/3">
         <h1 className="text-3xl font-bold my-8 text-center">Cadastro de cliente</h1>
-        <form className="w-full bg-gray-200 rounded-md p-6">
+        <form className="w-full bg-gray-200 rounded-md p-6 shadow-md">
           <div className="grid grid-cols-1 gap-4">
             <div>
               <label htmlFor="nome" className="block mb-1">
@@ -80,7 +80,7 @@ export default class FormularioCadastroCliente extends Component<{}, State> {
                 className="w-full rounded-md p-2"
                 type="text"
                 id="nomeSocial"
-                placeholder="Digite o nome social (se aplicável)"
+                placeholder="Digite o nome social"
               />
             </div>
           </div>

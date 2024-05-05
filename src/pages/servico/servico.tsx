@@ -13,7 +13,7 @@ export default class Servico extends Component {
           </a>
         </div>
         <div>
-          <div className="flex flex-col items-start md:flex-row gap-5 md:items-center bg-white p-3 rounded-md border-4">
+          <div className="flex flex-col items-start md:flex-row gap-5 md:items-center bg-white p-3 rounded-md shadow-md">
             <p className="">ID: 1</p>
             <p className="">Nome: Tosa</p>
             <p className="">Valor: 100 reais</p>

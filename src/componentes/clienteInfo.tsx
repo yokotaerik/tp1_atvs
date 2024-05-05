@@ -12,7 +12,7 @@ export default class ClienteInfo extends Component<ClienteInfoProps> {
   render() {
     return (
       <div>
-        <div className="bg-white p-5 rounded-lg mb-5">
+        <div className="bg-white p-5 rounded-lg mb-5 shadow-md">
           <p className="mb-1">Nome: {this.props.nome}</p>
           <p className="mb-1">Nome Social: {this.props.nomeSocial}</p>
           <p className="mb-1">CPF: {this.props.cpf}</p>

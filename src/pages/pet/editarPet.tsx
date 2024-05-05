@@ -5,7 +5,7 @@ export default class FormularioEditarPet extends Component {
     return (
       <div>
         <h1 className="text-3xl font-bold m-8">Editar pet</h1>
-        <form className="flex flex-col w-full gap-4 p-4 bg-neutral-200 rounded-md mt-4 ">
+        <form className="flex flex-col w-full gap-4 p-4 bg-neutral-200 rounded-md mt-4 shadow-md">
           <div>
             <label htmlFor="nome">Nome do Pet</label>
             <input

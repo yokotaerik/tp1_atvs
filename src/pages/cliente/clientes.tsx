@@ -9,15 +9,15 @@ export default class Clientes extends Component<props> {
     return (
       <div>
         <div className="flex flex-col gap-5 my-10">
-          <h1 className="text-center text-7xl font-bold">Clientes</h1>
+          <h1 className="text-center text-7xl font-bold ">Clientes</h1>
           <a href="/cliente/cadastrar">
-            <button className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded w-full">
+            <button className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded w-full shadow-md">
               Cadastrar novo cliente
             </button>
           </a>
         </div>
         <div>
-          <div className="flex flex-col items-start md:flex-row gap-5 md:items-center bg-white p-3 rounded-md border-4">
+          <div className="flex flex-col items-start md:flex-row gap-5 md:items-center bg-white p-3 rounded-md shadow-md">
             <p className="">ID: 1</p>
             <p className="">Nome: Erik</p>
             <p className="">Nome social: DASDA</p>

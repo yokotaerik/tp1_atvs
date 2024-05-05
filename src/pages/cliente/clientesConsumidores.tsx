@@ -36,7 +36,7 @@ class ClientesConsumidores extends React.Component {
         </h2>
         <ul>
           {clientesPorValor.map((cliente) => (
-            <li key={cliente.id} className="mb-4">
+            <li key={cliente.id} className="mb-4 bg-gray-100 shadow-md rounded-lg px-4 py-2 ">
               <p className="font-semibold">ID: {cliente.id}</p>
               <p className="text-gray-600">Nome: {cliente.nome}</p>
               <p className="text-gray-600">
@@ -51,7 +51,7 @@ class ClientesConsumidores extends React.Component {
         </h2>
         <ul>
           {clientesPorQuantidade.map((cliente) => (
-            <li key={cliente.id} className="mb-4">
+            <li key={cliente.id} className="mb-4 bg-gray-100 shadow-md rounded-lg px-4 py-2 ">
               <p className="font-semibold">ID: {cliente.id}</p>
               <p className="text-gray-600">Nome: {cliente.nome}</p>
               <p className="text-gray-600">
