@@ -1,6 +1,6 @@
 import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Home from "../componentes/home";
+import Home from "../pages/home";
 import FormularioCadastroCliente from "../pages/cliente/formularioCadastroCliente";
 import Clientes from "../pages/cliente/clientes";
 import Produtos from "../pages/produto/produtos";

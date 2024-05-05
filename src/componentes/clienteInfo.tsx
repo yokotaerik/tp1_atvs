@@ -1,4 +1,4 @@
-import { Component, ReactNode } from "react";
+import { Component } from "react";
 
 export type ClienteInfoProps = {
   nome: string;
@@ -12,10 +12,11 @@ export default class ClienteInfo extends Component<ClienteInfoProps> {
   render() {
     return (
       <div>
-        <div className="bg-white p-5 rounded-lg mb-5 shadow-md">
+        <div className="bg-neutral-200 p-5 rounded-lg mb-5 shadow-md">
           <p className="mb-1">Nome: {this.props.nome}</p>
           <p className="mb-1">Nome Social: {this.props.nomeSocial}</p>
           <p className="mb-1">CPF: {this.props.cpf}</p>
+          <p>RGs:</p>
           {this.props.rg.map((rg, index) => {
             return (
               <p key={index} className="mb-1">
@@ -23,10 +24,11 @@ export default class ClienteInfo extends Component<ClienteInfoProps> {
               </p>
             );
           })}
+          <p>Telefones:</p>
           {this.props.telefone.map((telefone, index) => {
             return (
               <p key={index} className="mb-1">
-                Telefone: {telefone}
+                {telefone}
               </p>
             );
           })}

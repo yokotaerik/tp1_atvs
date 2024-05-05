@@ -1,4 +1,5 @@
-import React from "react";
+import { Component } from "react";
+import Layout from "../../componentes/layout";
 
 interface Cliente {
   id: number;
@@ -7,7 +8,7 @@ interface Cliente {
   quantidadeTotal: number;
 }
 
-class ClientesConsumidores extends React.Component {
+class ClientesConsumidores extends Component {
   state = {
     clientes: [
       { id: 1, nome: "Erik", valorTotal: 1000, quantidadeTotal: 10 },
@@ -30,13 +31,16 @@ class ClientesConsumidores extends React.Component {
       .sort((a, b) => b.quantidadeTotal - a.quantidadeTotal);
 
     return (
-      <div className="max-w-md mx-auto p-8 bg-white shadow-md rounded-lg mt-10">
+      <Layout>
         <h2 className="text-xl font-semibold mb-4">
           Clientes que mais consumiram por valor:
         </h2>
         <ul>
           {clientesPorValor.map((cliente) => (
-            <li key={cliente.id} className="mb-4 bg-gray-100 shadow-md rounded-lg px-4 py-2 ">
+            <li
+              key={cliente.id}
+              className="mb-4 bg-gray-100 shadow-md rounded-lg px-4 py-2 "
+            >
               <p className="font-semibold">ID: {cliente.id}</p>
               <p className="text-gray-600">Nome: {cliente.nome}</p>
               <p className="text-gray-600">
@@ -51,7 +55,10 @@ class ClientesConsumidores extends React.Component {
         </h2>
         <ul>
           {clientesPorQuantidade.map((cliente) => (
-            <li key={cliente.id} className="mb-4 bg-gray-100 shadow-md rounded-lg px-4 py-2 ">
+            <li
+              key={cliente.id}
+              className="mb-4 bg-gray-100 shadow-md rounded-lg px-4 py-2 "
+            >
               <p className="font-semibold">ID: {cliente.id}</p>
               <p className="text-gray-600">Nome: {cliente.nome}</p>
               <p className="text-gray-600">
@@ -60,7 +67,7 @@ class ClientesConsumidores extends React.Component {
             </li>
           ))}
         </ul>
-      </div>
+      </Layout>
     );
   }
 }

@@ -1,10 +1,11 @@
 import { Component } from "react";
 import ProdutoServico from "../../componentes/produtoServico";
+import Layout from "../../componentes/layout";
 
 export default class Produtos extends Component {
   render() {
     return (
-      <div>
+      <Layout>
         <div className="flex flex-col gap-5  my-10">
           <h1 className="text-center text-7xl font-bold">Produtos</h1>
           <a href="/produto/cadastrar">
@@ -14,7 +15,7 @@ export default class Produtos extends Component {
           </a>
         </div>
         <div>
-          <div className="flex flex-col items-start md:flex-row gap-5 md:items-center bg-white p-3 rounded-md shadow-md ">
+          <div className="flex flex-col items-start md:flex-row gap-5 md:items-center bg-neutral-200 p-3 rounded-md shadow-md ">
             <ProdutoServico
               id={1}
               nome="Produto 1"
@@ -34,7 +35,7 @@ export default class Produtos extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </Layout>
     );
   }
 }

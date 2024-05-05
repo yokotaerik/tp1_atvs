@@ -1,9 +1,10 @@
 import { Component } from "react";
+import Layout from "../../componentes/layout";
 
 export default class Consumir extends Component {
   render() {
     return (
-      <div className="max-w-md mx-auto p-8 bg-white shadow-md rounded-lg mt-10">
+      <Layout>
         <form className="mb-6">
           <h2 className="text-xl font-semibold mb-4">Consumir Produto</h2>
           <div className="mb-4">
@@ -62,7 +63,7 @@ export default class Consumir extends Component {
             Consumir
           </button>
         </form>
-      </div>
+      </Layout>
     );
   }
 }

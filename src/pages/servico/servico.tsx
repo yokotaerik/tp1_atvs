@@ -1,9 +1,10 @@
 import { Component } from "react";
+import Layout from "../../componentes/layout";
 
 export default class Servico extends Component {
   render() {
     return (
-      <div>
+      <Layout>
         <div className="flex flex-col gap-5  my-10">
           <h1 className="text-center text-7xl font-bold">Serviços</h1>
           <a href="/servico/cadastrar">
@@ -13,7 +14,7 @@ export default class Servico extends Component {
           </a>
         </div>
         <div>
-          <div className="flex flex-col items-start md:flex-row gap-5 md:items-center bg-white p-3 rounded-md shadow-md">
+          <div className="flex flex-col items-start md:flex-row gap-5 md:items-center bg-neutral-200 p-3 rounded-md shadow-md">
             <p className="">ID: 1</p>
             <p className="">Nome: Tosa</p>
             <p className="">Valor: 100 reais</p>
@@ -31,7 +32,7 @@ export default class Servico extends Component {
             </div>
           </div>
         </div>
-      </div>
+      </Layout>
     );
   }
 }

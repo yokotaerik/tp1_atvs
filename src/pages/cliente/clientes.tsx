@@ -1,4 +1,5 @@
 import { Component } from "react";
+import Layout from "../../componentes/layout";
 
 type props = {
   tema: string;
@@ -7,7 +8,7 @@ type props = {
 export default class Clientes extends Component<props> {
   render() {
     return (
-      <div>
+      <Layout>
         <div className="flex flex-col gap-5 my-10">
           <h1 className="text-center text-7xl font-bold ">Clientes</h1>
           <a href="/cliente/cadastrar">
@@ -17,7 +18,7 @@ export default class Clientes extends Component<props> {
           </a>
         </div>
         <div>
-          <div className="flex flex-col items-start md:flex-row gap-5 md:items-center bg-white p-3 rounded-md shadow-md">
+          <div className="flex flex-col items-start md:flex-row gap-5 md:items-center bg-neutral-200 p-3 rounded-md shadow-md">
             <p className="">ID: 1</p>
             <p className="">Nome: Erik</p>
             <p className="">Nome social: DASDA</p>
@@ -39,7 +40,7 @@ export default class Clientes extends Component<props> {
             </div>
           </div>
         </div>
-      </div>
+      </Layout>
     );
   }
 }

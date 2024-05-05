@@ -12,7 +12,7 @@ export default class PetInfo extends Component<PetInfoProps> {
   render() {
     return (
       <div>
-        <div className="bg-white p-5 rounded-lg mb-5 shadow-md">
+        <div className="bg-neutral-200 p-5 rounded-lg mb-5 shadow-md">
           <p className="mb-1">ID: {this.props.id}</p>
           <p className="mb-1">Nome: {this.props.nome}</p>
           <p className="mb-1">Tipo: {this.props.tipo}</p>

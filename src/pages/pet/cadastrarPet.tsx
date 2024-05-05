@@ -1,9 +1,10 @@
 import React, { Component } from "react";
+import Layout from "../../componentes/layout";
 
 export default class FormularioCadastrarPet extends Component {
   render() {
     return (
-      <div>
+      <Layout>
         <h1 className="text-3xl font-bold m-8">Cadastrar pet</h1>
         <form className="flex flex-col w-full gap-4 p-4 bg-neutral-200 rounded-md mt-4 shadow-md ">
           <div>
@@ -51,7 +52,7 @@ export default class FormularioCadastrarPet extends Component {
             </button>
           </div>
         </form>
-      </div>
+      </Layout>
     );
   }
 }
