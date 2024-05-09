@@ -2,67 +2,59 @@ import { Component } from "react";
 import Layout from "../../componentes/layout";
 
 export default class Consumir extends Component {
+  state = {
+    produtos: [
+      { id: 1, nome: "Ração de gato" },
+      { id: 2, nome: "Ração de cachorro" },
+      { id: 3, nome: "Areia sanitária" },
+    ],
+    servicos: [
+      { id: 1, nome: "Tosa de cachorro" },
+      { id: 2, nome: "Banho de cachorro" },
+      { id: 3, nome: "Consulta veterinária" },
+    ],
+  };
+
   render() {
+    const produtos = this.state.produtos;
+    const servicos = this.state.servicos;
     return (
       <Layout>
-        <form className="mb-6">
-          <h2 className="text-xl font-semibold mb-4">Consumir Produto</h2>
-          <div className="mb-4">
-            <label htmlFor="clienteProduto" className="block mb-1">
-              ID do Cliente:
-            </label>
+        <div className="flex gap-5 flex-col">
+          <form className="mb-6">
+            <h2 className="text-xl font-semibold mb-4">Adicionar Produto</h2>
+            <select name="" id="" className="bg-gray-200 py-2 rounded-md">
+              {produtos.map((produtos) => (
+                <option value={produtos.id}>{produtos.nome}</option>
+              ))}
+            </select>
             <input
-              id="clienteProduto"
               type="text"
-              className="w-full rounded-md p-2 border border-gray-300"
+              className="bg-gray-200 py-2 rounded-md text-end"
+              placeholder="Quantidade de produtos"
             />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="produto" className="block mb-1">
-              ID do Produto:
-            </label>
-            <input
-              id="produto"
-              type="text"
-              className="w-full rounded-md p-2 border border-gray-300"
-            />
-          </div>
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-          >
-            Consumir
-          </button>
-        </form>
-        <form>
-          <h2 className="text-xl font-semibold mb-4">Consumir Serviço</h2>
-          <div className="mb-4">
-            <label htmlFor="clienteServico" className="block mb-1">
-              ID do Cliente:
-            </label>
-            <input
-              id="clienteServico"
-              type="text"
-              className="w-full rounded-md p-2 border border-gray-300"
-            />
-          </div>
-          <div className="mb-4">
-            <label htmlFor="servico" className="block mb-1">
-              ID do Serviço:
-            </label>
-            <input
-              id="servico"
-              type="text"
-              className="w-full rounded-md p-2 border border-gray-300"
-            />
-          </div>
-          <button
-            type="submit"
-            className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
-          >
-            Consumir
-          </button>
-        </form>
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            >
+              Adicionar
+            </button>
+          </form>
+          <form className="mb-6">
+            <h2 className="text-xl font-semibold mb-4">Adicionar Servico</h2>
+            <select name="" id="" className="bg-gray-200 py-2 rounded-md">
+              {servicos.map((servicos) => (
+                <option value={servicos.id}>{servicos.nome}</option>
+              ))}
+            </select>
+            <button
+              type="submit"
+              className="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600"
+            >
+              Adicionar
+            </button>
+          </form>
+        </div>
       </Layout>
     );
   }

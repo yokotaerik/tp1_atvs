@@ -10,10 +10,22 @@ export default class Home extends Component {
         </h1>
         <div className="flex flex-col space-y-4">
           <a
-            href="clientes/consumir"
+            href="clientes"
             className="block bg-blue-500 text-white px-4 py-2 rounded-md text-center hover:bg-blue-600"
           >
-            Adicionar um produto ou serviço a um cliente
+            Clientes
+          </a>
+          <a
+            href="clientes"
+            className="block bg-blue-500 text-white px-4 py-2 rounded-md text-center hover:bg-blue-600"
+          >
+            Produtos
+          </a>
+          <a
+            href="clientes"
+            className="block bg-blue-500 text-white px-4 py-2 rounded-md text-center hover:bg-blue-600"
+          >
+            Serviços
           </a>
           <a
             href="cliente/consumidores"

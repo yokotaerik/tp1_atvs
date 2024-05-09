@@ -1,6 +1,6 @@
 import { Component } from "react";
 
-interface ProdutoServicoProps {
+export interface ProdutoServicoProps {
   id: number;
   nome: string;
   valor: number;

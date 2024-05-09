@@ -12,10 +12,10 @@ import FormularioEditarServico from "../pages/servico/editarServico";
 import FormularioEditarProduto from "../pages/produto/editarProduto";
 import FormularioCadastrarPet from "../pages/pet/cadastrarPet";
 import ClientesConsumidores from "../pages/cliente/clientesConsumidores";
-import Consumir from "../pages/cliente/consumir";
 import MaisConsumidos from "../pages/maisConsumidos";
 import FormularioEditarPet from "../pages/pet/editarPet";
 import Cliente from "../pages/cliente/cliente";
+import Consumir from "../pages/cliente/consumir";
 
 class AppRouter extends React.Component {
   render() {
@@ -23,14 +23,14 @@ class AppRouter extends React.Component {
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Home />} />
-          <Route path="/cliente" element={<Clientes tema="(255,0,255)" />} />
-          <Route path="/cliente/1" element={<Cliente />} />
+          <Route path="/clientes" element={<Clientes tema="(255,0,255)" />} />
+          <Route path="/clientes/1" element={<Cliente />} />
           <Route
-            path="/cliente/cadastrar"
+            path="/clientes/cadastrar"
             element={<FormularioCadastroCliente />}
           />
           <Route
-            path="/cliente/editar/1"
+            path="/clientes/editar/1"
             element={<FormularioEditarCliente />}
           />
           <Route path="/pet/cadastrar/1" element={<FormularioCadastrarPet />} />
@@ -54,7 +54,7 @@ class AppRouter extends React.Component {
             element={<FormularioEditarServico />}
           />
           <Route
-            path="/cliente/consumidores"
+            path="/clientes/consumidores"
             element={<ClientesConsumidores />}
           />
           <Route path="/clientes/consumir" element={<Consumir />} />

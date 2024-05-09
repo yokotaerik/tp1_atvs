@@ -11,7 +11,7 @@ export default class Clientes extends Component<props> {
       <Layout>
         <div className="flex flex-col gap-5 my-10">
           <h1 className="text-center text-7xl font-bold ">Clientes</h1>
-          <a href="/cliente/cadastrar">
+          <a href="/clientes/cadastrar">
             <button className="bg-blue-500 hover:bg-blue-600 text-white py-1 px-3 rounded w-full shadow-md">
               Cadastrar novo cliente
             </button>
@@ -24,12 +24,12 @@ export default class Clientes extends Component<props> {
             <p className="">Nome social: DASDA</p>
             <p className="">CPF: 12345678911</p>
             <div className="flex gap-2">
-              <a href="/cliente/1">
+              <a href="/clientes/1">
                 <button className="bg-blue-500 hover:bg-red-600 text-white py-1 px-3 rounded">
                   Detalhes
                 </button>
               </a>
-              <a href="/cliente/editar/1">
+              <a href="/clientes/editar/1">
                 <button className="bg-blue-500 hover:bg-red-600 text-white py-1 px-3 rounded">
                   Editar
                 </button>

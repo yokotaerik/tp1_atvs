@@ -1,4 +1,10 @@
 import { Component } from "react";
+import ProdutoServico, { ProdutoServicoProps } from "./produtoServico";
+
+export type produtoServicosConsumidos = {
+  produtoOuServico: ProdutoServicoProps;
+  data: Date;
+};
 
 export type ClienteInfoProps = {
   nome: string;
@@ -6,6 +12,8 @@ export type ClienteInfoProps = {
   cpf: string;
   rg: string[];
   telefone: string[];
+  produtosConsumidos?: produtoServicosConsumidos[];
+  servicosConsumidos?: produtoServicosConsumidos[];
 };
 
 export default class ClienteInfo extends Component<ClienteInfoProps> {
