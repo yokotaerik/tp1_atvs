@@ -1,0 +1,77 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = "mysql://root:fatec@localhost:3306/atv5"
+}
+
+model Telefone {
+  id        Int     @id @default(autoincrement())
+  ddd       String
+  numero    String
+  cliente   Cliente @relation(fields: [clienteId], references: [id])
+  clienteId Int
+}
+
+model Servico {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  valor     Float
+  raca      String
+  tipo      String // Pode precisar de refinamento dependendo do contexto
+  cliente   Cliente? @relation(fields: [clienteId], references: [id])
+  clienteId Int?
+}
+
+model RG {
+  valor       String
+  dataEmissao DateTime
+  cliente     Cliente  @relation(fields: [clienteId], references: [id])
+  clienteId   Int
+
+  @@id([valor, clienteId])
+}
+
+model Produto {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  valor     Float
+  raca      String
+  tipo      String // Pode precisar de refinamento dependendo do contexto
+  cliente   Cliente? @relation(fields: [clienteId], references: [id])
+  clienteId Int?
+}
+
+model CPF {
+  valor       String
+  dataEmissao DateTime
+  cliente     Cliente  @relation(fields: [clienteId], references: [id])
+  clienteId   Int      @unique
+
+  @@id([valor])
+}
+
+model Cliente {
+  id                 Int        @id @default(autoincrement())
+  nome               String
+  nomeSocial         String
+  dataCadastro       DateTime?  @default(now())
+  telefones          Telefone[]
+  rgs                RG[]
+  cpf                CPF?
+  produtosConsumidos Produto[]
+  servicosConsumidos Servico[]
+  pets               Pet[]
+}
+
+model Pet {
+  id        Int     @id @default(autoincrement())
+  nome      String
+  tipo      String
+  raca      String
+  genero    String
+  cliente   Cliente @relation(fields: [clienteId], references: [id])
+  clienteId Int
+}
