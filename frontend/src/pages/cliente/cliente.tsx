@@ -7,16 +7,17 @@ import api from "../../utils/api";
 import { useParams } from "react-router-dom";
 import { ClienteCompletoProps } from "./editarCliente";
 
-interface Pet {
+export type PetInfoProps = {
+  id: string;
   nome: string;
   tipo: string;
   raca: string;
   genero: string;
-}
+};
 
 const Cliente = () => {
   const [cliente, setCliente] = useState<ClienteCompletoProps>();
-  const [pets, setPets] = useState<Pet[]>([]);
+  const [pets, setPets] = useState<PetInfoProps[]>([]);
   const { id } = useParams();
 
   const fetchCliente = async () => {
@@ -24,6 +25,7 @@ const Cliente = () => {
       const response = await api.get(`/cliente/achar/${id}`);
       const cliente = response.data;
       setCliente(cliente);
+      setPets(cliente.pets);
     } catch (error) {
       console.log(error);
     }
@@ -64,7 +66,7 @@ const Cliente = () => {
               pets.map((pet, index) => (
                 <PetInfo
                   key={index}
-                  id="1"
+                  id={pet.id}
                   nome={pet.nome}
                   tipo={pet.tipo}
                   raca={pet.raca}

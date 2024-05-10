@@ -32,20 +32,20 @@ const AppRouter = () => {
           path="/clientes/editar/:id"
           element={<FormularioEditarCliente />}
         />
-        <Route path="/pet/cadastrar/1" element={<FormularioCadastrarPet />} />
-        <Route path="/pet/editar/1" element={<FormularioEditarPet />} />
+        <Route path="/pet/cadastrar/:id" element={<FormularioCadastrarPet />} />
+        <Route path="/pet/editar/:id" element={<FormularioEditarPet />} />
         <Route path="/produto" element={<Produtos />} />
         <Route
           path="/produto/cadastrar"
           element={<FormularioCadastroProduto />}
         />
-        <Route path="/produto/editar/1" element={<FormularioEditarProduto />} />
+        <Route path="/produto/editar/:id" element={<FormularioEditarProduto />} />
         <Route path="/servico" element={<Servico />} />
         <Route
           path="/servico/cadastrar"
           element={<FormularioCadastroServico />}
         />
-        <Route path="/servico/editar/1" element={<FormularioEditarServico />} />
+        <Route path="/servico/editar/:id" element={<FormularioEditarServico />} />
         <Route
           path="/clientes/consumidores"
           element={<ClientesConsumidores />}

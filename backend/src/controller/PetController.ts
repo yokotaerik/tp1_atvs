@@ -38,6 +38,24 @@ export const getAllPetsByClient = async (req: Request, res: Response) => {
   }
 };
 
+export const getPetById = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const pet = await repository.findUnique({
+      where: { id: Number(id) },
+    });
+
+    if (!pet) {
+      return res.status(404).json({ error: "Pet não encontrado" });
+    }
+
+    res.status(200).json(pet);
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao obter o pet pelo ID" });
+  }
+};
+
 // Rota para atualizar um pet pelo ID
 export const updatePetById = async (req: Request, res: Response) => {
   try {

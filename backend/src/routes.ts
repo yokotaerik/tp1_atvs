@@ -11,7 +11,11 @@ import {
   getAllServicos,
   updateServicoById,
 } from "./controller/ServicoController";
-import { createPet, deletePetById } from "./controller/PetController";
+import {
+  createPet,
+  deletePetById,
+  getPetById,
+} from "./controller/PetController";
 import { ClienteController } from "./controller/ClienteController";
 
 const router = express.Router();
@@ -26,6 +30,7 @@ router.get("/cliente/clientes", clienteController.getAllClientes);
 router.post("/consumir/produto", clienteController.consumirProduto);
 router.post("/consumir/servico", clienteController.consumirServico);
 //Pets
+router.get("/pet/:id", getPetById);
 router.post("/cliente/:id/pet", createPet);
 router.delete("/pet/:id", deletePetById);
 router.put("/pet/:id", deletePetById);
