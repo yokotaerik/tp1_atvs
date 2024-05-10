@@ -3,12 +3,14 @@ import {
   createProduto,
   deleteProdutoById,
   getAllProdutos,
+  getProdutoById,
   updateProdutoById,
 } from "./controller/ProdutoController";
 import {
   createServico,
   deleteServicoById,
   getAllServicos,
+  getServicoById,
   updateServicoById,
 } from "./controller/ServicoController";
 import {
@@ -36,12 +38,14 @@ router.delete("/pet/:id", deletePetById);
 router.put("/pet/:id", deletePetById);
 // Produtos
 router.get("/produto/produtos", getAllProdutos);
-router.post("/produto/produtos", createProduto);
+router.get("/produto/:id", getProdutoById);
+router.post("/produto/cadastrar", createProduto);
 router.put("/produto/:id", updateProdutoById);
 router.delete("/produto/:id", deleteProdutoById);
 // Servicos
 router.get("/servico/servicos", getAllServicos);
-router.post("/servico/servicos", createServico);
+router.get("/servico/:id", getServicoById);
+router.post("/servico/cadastrar", createServico);
 router.put("/servico/:id", updateServicoById);
 router.delete("/servico/:id", deleteServicoById);
 

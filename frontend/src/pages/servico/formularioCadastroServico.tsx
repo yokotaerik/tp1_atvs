@@ -1,7 +1,31 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../componentes/layout";
+import api from "../../utils/api";
 
 const FormularioCadastroServico = () => {
+  const [nome, setNome] = useState("");
+  const [valor, setValor] = useState("");
+  const [tipo, setTipo] = useState("");
+  const [raca, setRaca] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    api
+      .post("/servico/cadastrar", { nome, valor, tipo, raca })
+      .then((response) => {
+        if (response.status === 201) {
+          setNome("");
+          setValor("");
+          setTipo("");
+          setRaca("");
+          alert("Serviço cadastrado com sucesso!");
+        }
+      })
+      .catch((error) => {
+        alert("Erro ao cadastrar serviço!");
+      });
+  };
+
   return (
     <Layout>
       <h1 className="text-3xl font-bold m-8">Cadastro de serviço</h1>
@@ -13,6 +37,8 @@ const FormularioCadastroServico = () => {
             type="text"
             id="nome"
             placeholder="Nome"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
           />
         </div>
         <div>
@@ -22,6 +48,8 @@ const FormularioCadastroServico = () => {
             type="text"
             id="valor"
             placeholder="Valor"
+            value={valor}
+            onChange={(e) => setValor(e.target.value)}
           />
         </div>
         <div>
@@ -31,6 +59,8 @@ const FormularioCadastroServico = () => {
             type="text"
             id="tipo"
             placeholder="Tipo"
+            value={tipo}
+            onChange={(e) => setTipo(e.target.value)}
           />
         </div>
         <div>
@@ -40,12 +70,15 @@ const FormularioCadastroServico = () => {
             type="text"
             id="raca"
             placeholder="Raça"
+            value={raca}
+            onChange={(e) => setRaca(e.target.value)}
           />
         </div>
         <div>
           <button
             type="button"
             className="bg-blue-400 p-2 w-full rounded-md text-2xl font-bold text-white"
+            onClick={handleSubmit}
           >
             Cadastrar serviço
           </button>

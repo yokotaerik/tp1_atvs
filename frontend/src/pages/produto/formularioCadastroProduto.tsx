@@ -1,11 +1,34 @@
-import React from "react";
+import React, { useState } from "react";
 import Layout from "../../componentes/layout";
+import api from "../../utils/api";
 
 const FormularioCadastroProduto = () => {
+  const [nome, setNome] = useState("");
+  const [valor, setValor] = useState("");
+  const [tipo, setTipo] = useState("");
+  const [raca, setRaca] = useState("");
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    api
+      .post("/produto/cadastrar", { nome, valor, tipo, raca })
+      .then((response) => {
+        if (response.status === 200) {
+          alert("Produto cadastrado com sucesso!");
+        }
+      })
+      .catch((error) => {
+        alert("Erro ao cadastrar produto!");
+      });
+  };
+
   return (
     <Layout>
       <h1 className="text-3xl font-bold m-8">Cadastro de produto</h1>
-      <form className="flex flex-col w-full gap-4 p-4 bg-neutral-200 rounded-md mt-4 shadow-md">
+      <form
+        className="flex flex-col w-full gap-4 p-4 bg-neutral-200 rounded-md mt-4 shadow-md"
+        onSubmit={handleSubmit}
+      >
         <div>
           <label htmlFor="nome">Nome</label>
           <input
@@ -13,6 +36,8 @@ const FormularioCadastroProduto = () => {
             type="text"
             id="nome"
             placeholder="Nome"
+            value={nome}
+            onChange={(e) => setNome(e.target.value)}
           />
         </div>
         <div>
@@ -22,6 +47,8 @@ const FormularioCadastroProduto = () => {
             type="text"
             id="valor"
             placeholder="Valor"
+            value={valor}
+            onChange={(e) => setValor(e.target.value)}
           />
         </div>
         <div>
@@ -31,6 +58,8 @@ const FormularioCadastroProduto = () => {
             type="text"
             id="tipo"
             placeholder="Tipo"
+            value={tipo}
+            onChange={(e) => setTipo(e.target.value)}
           />
         </div>
         <div>
@@ -40,11 +69,13 @@ const FormularioCadastroProduto = () => {
             type="text"
             id="raca"
             placeholder="Raça"
+            value={raca}
+            onChange={(e) => setRaca(e.target.value)}
           />
         </div>
         <div>
           <button
-            type="button"
+            type="submit"
             className="bg-blue-400 p-2 w-full rounded-md text-2xl font-bold text-white"
           >
             Cadastrar produto

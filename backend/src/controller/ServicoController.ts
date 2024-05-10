@@ -10,7 +10,7 @@ export const createServico = async (req: Request, res: Response) => {
     const servico = await repository.create({
       data: {
         nome,
-        valor,
+        valor: Number(valor.replace(",", ".")),
         raca,
         tipo,
       },
@@ -34,6 +34,24 @@ export const getAllServicos = async (req: Request, res: Response) => {
   }
 };
 
+export const getServicoById = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+
+    const servico = await repository.findUnique({
+      where: { id: Number(id) },
+    });
+
+    if (!servico) {
+      return res.status(404).json({ error: "Serviço não encontrado" });
+    }
+
+    res.status(200).json(servico);
+  } catch (error) {
+    res.status(500).json({ error: "Erro ao obter o serviço pelo ID" });
+  }
+};
+
 // Rota para atualizar um serviço pelo ID
 export const updateServicoById = async (req: Request, res: Response) => {
   try {
@@ -43,7 +61,7 @@ export const updateServicoById = async (req: Request, res: Response) => {
     // Encontre o serviço pelo ID no banco de dados e atualize seus dados
     const updatedServico = await repository.update({
       where: { id: Number(id) },
-      data: { nome, tipo, raca, valor },
+      data: { nome, tipo, raca, valor: Number(valor) },
     });
 
     if (!updatedServico) {
@@ -52,6 +70,7 @@ export const updateServicoById = async (req: Request, res: Response) => {
 
     res.status(200).json(updatedServico);
   } catch (error) {
+    console.log(error);
     res.status(500).json({ error: "Erro ao atualizar o serviço pelo ID" });
   }
 };

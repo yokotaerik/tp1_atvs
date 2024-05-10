@@ -5,7 +5,6 @@ import FormularioCadastroCliente from "../pages/cliente/formularioCadastroClient
 import Clientes from "../pages/cliente/clientes";
 import Produtos from "../pages/produto/produtos";
 import FormularioCadastroProduto from "../pages/produto/formularioCadastroProduto";
-import Servico from "../pages/servico/servico";
 import FormularioCadastroServico from "../pages/servico/formularioCadastroServico";
 import FormularioEditarCliente from "../pages/cliente/editarCliente";
 import FormularioEditarServico from "../pages/servico/editarServico";
@@ -16,6 +15,7 @@ import MaisConsumidos from "../pages/maisConsumidos";
 import FormularioEditarPet from "../pages/pet/editarPet";
 import Consumir from "../pages/cliente/consumir";
 import Cliente from "../pages/cliente/cliente";
+import Servico from "../pages/servico/servico";
 
 const AppRouter = () => {
   return (
