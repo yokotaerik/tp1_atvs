@@ -21,7 +21,7 @@ const clienteController = new ClienteController();
 // Cliente
 router.post("/cliente/cadastrar", clienteController.createCliente);
 router.post("/cliente/editar/:id", clienteController.createCliente);
-router.get("/cliente/:id", clienteController.getClientById);
+router.get("/cliente/achar/:id", clienteController.getClientById);
 router.get("/cliente/clientes", clienteController.getAllClientes);
 router.post("/consumir/produto", clienteController.consumirProduto);
 router.post("/consumir/servico", clienteController.consumirServico);

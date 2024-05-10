@@ -40,7 +40,13 @@ export class ClienteController {
 
   public createCliente = async (req: Request, res: Response) => {
     try {
-      const { nome, nomeSocial, cpf, rgs, telefones } = req.body;
+      const { nome, nomeSocial, cpf, cpfDataEmissao, rgs, telefones } =
+        req.body;
+
+      // Validate fields
+      if (!nome || !cpf || !cpfDataEmissao || !nomeSocial) {
+        return res.status(400).json({ error: "Campos inválidos" });
+      }
 
       const cliente = await this.repository.create({
         data: {
@@ -50,18 +56,26 @@ export class ClienteController {
         },
       });
 
-      telefones.forEach(async (telefone: any) => {
-        await this.adicionarTelefone(cliente.id, telefone.ddd, telefone.numero);
-      });
+      if (telefones.length > 0) {
+        telefones.forEach(async (telefone: any) => {
+          await this.adicionarTelefone(
+            cliente.id,
+            telefone.ddd,
+            telefone.numero
+          );
+        });
+      }
 
       rgs.forEach(async (rg: any) => {
+        console.log(rg);
         await this.adicionarRG(cliente.id, rg.valor, rg.dataEmissao);
       });
 
-      await this.adicionarCPF(cliente.id, cpf.valor, cpf.dataEmissao);
+      await this.adicionarCPF(cliente.id, cpf, cpfDataEmissao);
 
       res.status(201).json(cliente);
     } catch (error) {
+      // console.log(error);
       res.status(500).json({ error: "Erro ao criar um novo cliente" });
     }
   };
@@ -168,6 +182,12 @@ export class ClienteController {
   ) {
     try {
       // Converter a string de data para um objeto Date
+
+      // a data chega 2024-02-01
+      // pq o new Date não converte?
+
+      console.log(dataEmissao);
+
       const dataEmissaoDate = new Date(dataEmissao);
 
       const novoCPF = await prisma.cPF.create({

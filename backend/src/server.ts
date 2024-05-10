@@ -1,16 +1,13 @@
 import express from "express";
 import routes from "./routes";
+import cors from "cors";
 
 const app = express();
 
-// Adicione os middleares aqui
-
-// Define como padrão de comunicação JSON
 app.use(express.json());
+app.use(cors());
 
-// Use as rotas definidas no routes.ts
 app.use(routes);
-
 const PORT = 3333;
 
 // Inicia o server
