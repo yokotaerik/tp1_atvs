@@ -1,10 +1,11 @@
-import React, { Component } from "react";
+import React from "react";
+import Layout from "../../componentes/layout";
 
-export default function FormularioEditarServico() {
+const FormularioCadastroProduto = () => {
   return (
-    <div>
-      <h1 className="text-6xl font-bold m-8">Editar serviço</h1>
-      <form className="flex flex-col w-full gap-4 p-4 bg-neutral-200 rounded-md mt-4 ">
+    <Layout>
+      <h1 className="text-3xl font-bold m-8">Cadastro de produto</h1>
+      <form className="flex flex-col w-full gap-4 p-4 bg-neutral-200 rounded-md mt-4 shadow-md">
         <div>
           <label htmlFor="nome">Nome</label>
           <input
@@ -12,7 +13,6 @@ export default function FormularioEditarServico() {
             type="text"
             id="nome"
             placeholder="Nome"
-            value={"Banho"}
           />
         </div>
         <div>
@@ -22,7 +22,6 @@ export default function FormularioEditarServico() {
             type="text"
             id="valor"
             placeholder="Valor"
-            value={"R$ 100,00"}
           />
         </div>
         <div>
@@ -32,7 +31,6 @@ export default function FormularioEditarServico() {
             type="text"
             id="tipo"
             placeholder="Tipo"
-            value={"Porte médio"}
           />
         </div>
         <div>
@@ -42,7 +40,6 @@ export default function FormularioEditarServico() {
             type="text"
             id="raca"
             placeholder="Raça"
-            value={"Qualquer uma"}
           />
         </div>
         <div>
@@ -50,10 +47,12 @@ export default function FormularioEditarServico() {
             type="button"
             className="bg-blue-400 p-2 w-full rounded-md text-2xl font-bold text-white"
           >
-            Salvar
+            Cadastrar produto
           </button>
         </div>
       </form>
-    </div>
+    </Layout>
   );
-}
+};
+
+export default FormularioCadastroProduto;

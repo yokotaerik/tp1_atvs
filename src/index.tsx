@@ -10,8 +10,8 @@ const root = ReactDOM.createRoot(
 );
 root.render(
   <React.StrictMode>
-    <BarraNavegacao />
-    <div className="flex flex-col items-center bg-neutral-100  w-full min-h-screen">
+    <BarraNavegacao tema={"#31321"} />
+    <div className="flex flex-col items-center bg-blue-50  w-full min-h-screen p-4">
       <AppRouter />
     </div>
   </React.StrictMode>

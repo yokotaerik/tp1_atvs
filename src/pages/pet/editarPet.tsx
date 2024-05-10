@@ -1,26 +1,17 @@
-import React, { Component } from "react";
+import Layout from "../../componentes/layout";
 
-export default function FormularioCadastroProduto() {
+const FormularioEditarPet = () => {
   return (
-    <div>
-      <h1 className="text-6xl font-bold m-8">Cadastro de produto</h1>
-      <form className="flex flex-col w-full gap-4 p-4 bg-neutral-200 rounded-md mt-4 ">
+    <Layout>
+      <h1 className="text-3xl font-bold m-8">Editar pet</h1>
+      <form className="flex flex-col w-full gap-4 p-4 bg-neutral-200 rounded-md mt-4 shadow-md">
         <div>
-          <label htmlFor="nome">Nome</label>
+          <label htmlFor="nome">Nome do Pet</label>
           <input
             className="w-full rounded-md p-2"
             type="text"
             id="nome"
-            placeholder="Nome"
-          />
-        </div>
-        <div>
-          <label htmlFor="valor">Valor</label>
-          <input
-            className="w-full rounded-md p-2"
-            type="text"
-            id="valor"
-            placeholder="Valor"
+            placeholder="Nome do pet"
           />
         </div>
         <div>
@@ -28,17 +19,26 @@ export default function FormularioCadastroProduto() {
           <input
             className="w-full rounded-md p-2"
             type="text"
-            id="tipo"
+            id="nomeSocial"
             placeholder="Tipo"
           />
         </div>
         <div>
-          <label htmlFor="raca">Raça</label>
+          <label htmlFor="email">Raça</label>
           <input
             className="w-full rounded-md p-2"
             type="text"
-            id="raca"
+            id="raça"
             placeholder="Raça"
+          />
+        </div>
+        <div>
+          <label htmlFor="cpf">Genero</label>
+          <input
+            className="w-full rounded-md p-2"
+            type="text"
+            id="genero"
+            placeholder="Gênero"
           />
         </div>
         <div>
@@ -46,10 +46,12 @@ export default function FormularioCadastroProduto() {
             type="button"
             className="bg-blue-400 p-2 w-full rounded-md text-2xl font-bold text-white"
           >
-            Cadastrar produto
+            Salvar
           </button>
         </div>
       </form>
-    </div>
+    </Layout>
   );
-}
+};
+
+export default FormularioEditarPet;

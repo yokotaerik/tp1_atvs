@@ -1,4 +1,10 @@
-import { Component, ReactNode } from "react";
+import { Component } from "react";
+import ProdutoServico, { ProdutoServicoProps } from "./produtoServico";
+
+export type produtoServicosConsumidos = {
+  produtoOuServico: ProdutoServicoProps;
+  data: Date;
+};
 
 export type ClienteInfoProps = {
   nome: string;
@@ -6,30 +12,36 @@ export type ClienteInfoProps = {
   cpf: string;
   rg: string[];
   telefone: string[];
+  produtosConsumidos?: produtoServicosConsumidos[];
+  servicosConsumidos?: produtoServicosConsumidos[];
 };
 
-export default function ClienteInfo(clienteInfo: ClienteInfoProps) {
-  return (
-    <div>
-      <div className="bg-white p-5 rounded-lg mb-5">
-        <p className="mb-1">Nome: {clienteInfo.nome}</p>
-        <p className="mb-1">Nome Social: {clienteInfo.nomeSocial}</p>
-        <p className="mb-1">CPF: {clienteInfo.cpf}</p>
-        {clienteInfo.rg.map((rg, index) => {
-          return (
-            <p key={index} className="mb-1">
-              RG: {rg}
-            </p>
-          );
-        })}
-        {clienteInfo.telefone.map((telefone, index) => {
-          return (
-            <p key={index} className="mb-1">
-              Telefone: {telefone}
-            </p>
-          );
-        })}
+export default class ClienteInfo extends Component<ClienteInfoProps> {
+  render() {
+    return (
+      <div>
+        <div className="bg-neutral-200 p-5 rounded-lg mb-5 shadow-md">
+          <p className="mb-1">Nome: {this.props.nome}</p>
+          <p className="mb-1">Nome Social: {this.props.nomeSocial}</p>
+          <p className="mb-1">CPF: {this.props.cpf}</p>
+          <p>RGs:</p>
+          {this.props.rg.map((rg, index) => {
+            return (
+              <p key={index} className="mb-1">
+                RG: {rg}
+              </p>
+            );
+          })}
+          <p>Telefones:</p>
+          {this.props.telefone.map((telefone, index) => {
+            return (
+              <p key={index} className="mb-1">
+                {telefone}
+              </p>
+            );
+          })}
+        </div>
       </div>
-    </div>
-  );
+    );
+  }
 }

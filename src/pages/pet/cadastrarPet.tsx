@@ -1,26 +1,17 @@
-export default function FormularioEditarProduto() {
+import Layout from "../../componentes/layout";
+
+const FormularioCadastrarPet = () => {
   return (
-    <div>
-      <h1 className="text-6xl font-bold m-8">Editar produto</h1>
-      <form className="flex flex-col w-full gap-4 p-4 bg-neutral-200 rounded-md mt-4 ">
+    <Layout>
+      <h1 className="text-3xl font-bold m-8">Cadastrar pet</h1>
+      <form className="flex flex-col w-full gap-4 p-4 bg-neutral-200 rounded-md mt-4 shadow-md ">
         <div>
-          <label htmlFor="nome">Nome</label>
+          <label htmlFor="nome">Nome do Pet</label>
           <input
             className="w-full rounded-md p-2"
             type="text"
             id="nome"
-            placeholder="Nome"
-            value={"Ração para cachorro"}
-          />
-        </div>
-        <div>
-          <label htmlFor="valor">Valor</label>
-          <input
-            className="w-full rounded-md p-2"
-            type="text"
-            id="valor"
-            placeholder="Valor"
-            value={"R$ 100,00"}
+            placeholder="Nome do pet"
           />
         </div>
         <div>
@@ -28,19 +19,26 @@ export default function FormularioEditarProduto() {
           <input
             className="w-full rounded-md p-2"
             type="text"
-            id="tipo"
+            id="nomeSocial"
             placeholder="Tipo"
-            value={"Médio porte"}
           />
         </div>
         <div>
-          <label htmlFor="raca">Raça</label>
+          <label htmlFor="email">Raça</label>
           <input
             className="w-full rounded-md p-2"
             type="text"
-            id="raca"
+            id="raça"
             placeholder="Raça"
-            value={"Qualquer uma"}
+          />
+        </div>
+        <div>
+          <label htmlFor="cpf">Genero</label>
+          <input
+            className="w-full rounded-md p-2"
+            type="text"
+            id="genero"
+            placeholder="Gênero"
           />
         </div>
         <div>
@@ -52,6 +50,8 @@ export default function FormularioEditarProduto() {
           </button>
         </div>
       </form>
-    </div>
+    </Layout>
   );
-}
+};
+
+export default FormularioCadastrarPet;
