@@ -5,7 +5,7 @@ import Layout from "../../componentes/layout";
 import ProdutoServico from "../../componentes/produtoServico";
 import api from "../../utils/api";
 import { useParams } from "react-router-dom";
-import { ClienteCompletoProps } from "./editarCliente";
+import { ClienteCompletoProps, ClienteCompletoResponse } from "../../utils/interfaces";
 
 export type PetInfoProps = {
   id: string;
@@ -16,7 +16,7 @@ export type PetInfoProps = {
 };
 
 const Cliente = () => {
-  const [cliente, setCliente] = useState<ClienteCompletoProps>();
+  const [cliente, setCliente] = useState<ClienteCompletoResponse>();
   const [pets, setPets] = useState<PetInfoProps[]>([]);
   const { id } = useParams();
 
@@ -78,7 +78,7 @@ const Cliente = () => {
             )}
           </div>
           <div>
-            <a href="/clientes/consumir">
+            <a href={`/clientes/consumir/${id}`}>
               <button className="bg-blue-400 p-2 rounded-md text-xl font-bold text-white">
                 Cadastrar um consumo do cliente
               </button>
@@ -92,15 +92,18 @@ const Cliente = () => {
                 cliente.produtosConsumidos.map((p) => (
                   <div className="flex flex-col items-start md:flex-row gap-5 md:items-center bg-neutral-200 p-3 rounded-md shadow-md ">
                     <ProdutoServico
-                      id={p.id}
-                      nome={p.nome}
-                      raca={p.raca}
-                      tipo={p.tipo}
-                      valor={p.valor}
+                      id={p.produto.id}
+                      nome={p.produto.nome}
+                      raca={p.produto.raca}
+                      tipo={p.produto.tipo}
+                      valor={p.produto.valor}
                     />
                     {/* <p className="text-gray-600"> */}
                     {/* Data de ocorência: {p.data.toLocaleDateString()} */}
                     {/* </p> */}
+                    <p
+                      className="text-gray-600"
+                    >Quantidade total de vezes consumida: {p.quantidadeDeVezes}</p>
                   </div>
                 ))}
             </div>

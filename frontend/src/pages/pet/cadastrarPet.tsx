@@ -24,7 +24,7 @@ const FormularioCadastrarPet = () => {
         setTipo("");
         setRaca("");
         setGenero("");
-        console.log("Pet cadastrado com sucesso");
+        alert("Pet cadastrado com sucesso");
       }
     } catch (error) {
       console.error(error);

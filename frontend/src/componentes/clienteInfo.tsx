@@ -1,5 +1,5 @@
 import React from "react";
-import { ClienteCompletoProps } from "../pages/cliente/editarCliente";
+import { ClienteCompletoProps } from "../utils/interfaces";
 
 const ClienteInfo: React.FC<ClienteCompletoProps> = (props) => {
   return (

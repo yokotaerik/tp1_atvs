@@ -1,12 +1,7 @@
 import { Component } from "react";
+import { ProdutoServicoProps } from "../utils/interfaces";
 
-export interface ProdutoServicoProps {
-  id: number;
-  nome: string;
-  valor: number;
-  tipo: string;
-  raca: string;
-}
+
 
 export default class ProdutoServico extends Component<ProdutoServicoProps> {
   render() {

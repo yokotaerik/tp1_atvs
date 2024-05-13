@@ -35,13 +35,12 @@ model RG {
 }
 
 model Produto {
-  id        Int      @id @default(autoincrement())
-  nome      String
-  valor     Float
-  raca      String
-  tipo      String // Pode precisar de refinamento dependendo do contexto
-  cliente   Cliente? @relation(fields: [clienteId], references: [id])
-  clienteId Int?
+  id       Int              @id @default(autoincrement())
+  nome     String
+  valor    Float
+  raca     String
+  tipo     String // Pode precisar de refinamento dependendo do contexto
+  clientes ClienteProduto[] // Relação inversa com ClienteProduto
 }
 
 model CPF {
@@ -54,14 +53,14 @@ model CPF {
 }
 
 model Cliente {
-  id                 Int        @id @default(autoincrement())
+  id                 Int              @id @default(autoincrement())
   nome               String
   nomeSocial         String
-  dataCadastro       DateTime?  @default(now())
+  dataCadastro       DateTime?        @default(now())
   telefones          Telefone[]
   rgs                RG[]
   cpf                CPF?
-  produtosConsumidos Produto[]
+  produtosConsumidos ClienteProduto[]
   servicosConsumidos Servico[]
   pets               Pet[]
 }
@@ -74,4 +73,15 @@ model Pet {
   genero    String
   cliente   Cliente @relation(fields: [clienteId], references: [id])
   clienteId Int
+}
+
+model ClienteProduto {
+  id                Int     @id @default(autoincrement())
+  cliente           Cliente @relation(fields: [clienteId], references: [id])
+  clienteId         Int
+  produto           Produto @relation(fields: [produtoId], references: [id])
+  produtoId         Int
+  quantidadeDeVezes Int     @default(0)
+
+  @@unique([clienteId, produtoId])
 }

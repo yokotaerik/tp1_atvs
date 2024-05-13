@@ -2,9 +2,9 @@ import { Request, Response } from "express";
 import prisma from "../prisma";
 import ClienteService from "../services/ClienteService";
 
+const clienteService = new ClienteService();
 export class ClienteController {
   private repository = prisma.cliente;
-  private clienteService = new ClienteService();
 
   public getAllClientes = async (req: Request, res: Response) => {
     try {
@@ -29,6 +29,11 @@ export class ClienteController {
           rgs: true,
           telefones: true,
           pets: true,
+          produtosConsumidos: {
+            include: {
+              produto: true,
+            },
+          },
         },
       });
 
@@ -43,8 +48,14 @@ export class ClienteController {
       const { nome, nomeSocial, cpf, cpfDataEmissao, rgs, telefones } =
         req.body;
 
-      // Validate fields
-      if (!nome || !cpf || !cpfDataEmissao || !nomeSocial) {
+      if (
+        !nome ||
+        !cpf ||
+        !cpfDataEmissao ||
+        !nomeSocial ||
+        !rgs ||
+        !telefones
+      ) {
         return res.status(400).json({ error: "Campos inválidos" });
       }
 
@@ -56,6 +67,8 @@ export class ClienteController {
         },
       });
 
+      await this.adicionarCPF(cliente.id, cpf, cpfDataEmissao);
+
       if (telefones.length > 0) {
         telefones.forEach(async (telefone: any) => {
           await this.adicionarTelefone(
@@ -66,23 +79,27 @@ export class ClienteController {
         });
       }
 
-      rgs.forEach(async (rg: any) => {
-        console.log(rg);
-        await this.adicionarRG(cliente.id, rg.valor, rg.dataEmissao);
-      });
-
-      await this.adicionarCPF(cliente.id, cpf, cpfDataEmissao);
+      if (rgs.length > 0) {
+        rgs.forEach(async (rg: any) => {
+          console.log(rg);
+          await this.adicionarRG(cliente.id, rg.valor, rg.dataEmissao);
+        });
+      }
 
       res.status(201).json(cliente);
     } catch (error) {
-      // console.log(error);
+      console.log(error);
       res.status(500).json({ error: "Erro ao criar um novo cliente" });
     }
   };
 
   public updateCliente = async (req: Request, res: Response) => {
     try {
-      const { nome, nomeSocial, cpf, rgs, telefones } = req.body;
+      const { nome, nomeSocial, rgs, telefones } = req.body;
+
+      if (!nome || !nomeSocial || !rgs || !telefones) {
+        return res.status(400).json({ error: "Campos inválidos" });
+      }
 
       const id = Number(req.params.id);
 
@@ -110,26 +127,14 @@ export class ClienteController {
         await this.adicionarTelefone(id, telefone.ddd, telefone.numero);
       }
 
-      // Remove todos os RGs antigos do cliente
-      await this.repository.update({
-        where: { id },
-        data: {
-          rgs: {
-            deleteMany: {},
-          },
-        },
-      });
-
       // Adiciona os novos RGs
       for (const rg of rgs) {
         await this.adicionarRG(id, rg.valor, rg.dataEmissao);
       }
 
-      // Atualiza o CPF do cliente
-      await this.adicionarCPF(id, cpf.valor, cpf.dataEmissao);
-
       res.status(200).json(clienteAtualizado);
     } catch (error) {
+      console.log(error);
       res.status(500).json({ error: "Erro ao atualizar o cliente" });
     }
   };
@@ -203,23 +208,94 @@ export class ClienteController {
     }
   }
 
-  public async consumirProduto(req: Request, res: Response) {
-    const { clienteId, produtoId } = req.body;
+  async consumirProduto(req: Request, res: Response) {
+    const clienteId = Number(req.body.clienteId);
+    const produtoId = Number(req.body.produtoId);
+    const qnt = Number(req.body.quantidade);
+
     try {
-      this.clienteService.consumirProduto(clienteId, produtoId);
-      return res.status(200).json({ message: "Produto consumido com sucesso" });
+      const cliente = await prisma.cliente.findUnique({
+        where: { id: clienteId },
+        include: { produtosConsumidos: true }, // Inclui os produtos consumidos atualmente pelo cliente
+      });
+
+      if (!cliente) {
+        return res.status(404).json({ error: "Cliente não encontrado" });
+      }
+
+      let produtosConsumidos = [];
+
+      // Verifica se o cliente já consumiu o produto
+      const produtoCliente = await prisma.clienteProduto.findFirst({
+        where: {
+          clienteId,
+          produtoId,
+        },
+      });
+
+      if (produtoCliente) {
+        const novaQuantidade = (produtoCliente.quantidadeDeVezes += qnt);
+        const produtoConsumido = await prisma.clienteProduto.update({
+          where: { id: produtoCliente.id },
+          data: {
+            quantidadeDeVezes: novaQuantidade,
+          },
+        });
+        res.status(200).json(produtoConsumido);
+      } else {
+        const novoProdutoConsumido = await prisma.clienteProduto.create({
+          data: {
+            clienteId,
+            produtoId,
+            quantidadeDeVezes: qnt,
+          },
+        });
+
+        res.status(200).json(novoProdutoConsumido);
+      }
     } catch (error) {
-      return res.status(500).json({ error: "Erro ao consumir produto" });
+      console.error(error);
+      res.status(500).json({ error: "Erro ao consumir o produto" });
     }
   }
 
   public async consumirServico(req: Request, res: Response) {
     const { clienteId, servicoId } = req.body;
     try {
-      this.clienteService.consumirServico(clienteId, servicoId);
+      clienteService.consumirServico(clienteId, servicoId);
       return res.status(200).json({ message: "servico consumido com sucesso" });
     } catch (error) {
       return res.status(500).json({ error: "Erro ao consumir servico" });
+    }
+  }
+
+  public async deletarCliente(req: Request, res: Response) {
+    try {
+      const clienteId = Number(req.params.id);
+
+      await prisma.telefone.deleteMany({
+        where: { clienteId },
+      });
+
+      // Em seguida, exclua os RGs associados ao cliente
+      await prisma.rG.deleteMany({
+        where: { clienteId },
+      });
+
+      // Depois, exclua os CPFs associados ao cliente
+      await prisma.cPF.deleteMany({
+        where: { clienteId },
+      });
+
+      // Finalmente, exclua o cliente
+      await prisma.cliente.delete({
+        where: { id: clienteId },
+      });
+
+      return res.status(200).json({ message: "Cliente deletado com sucesso" });
+    } catch (error) {
+      console.log(error);
+      return res.status(500).json({ error: "Erro ao deletar cliente" });
     }
   }
 }

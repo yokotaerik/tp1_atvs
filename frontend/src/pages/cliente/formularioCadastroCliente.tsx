@@ -1,36 +1,14 @@
 import React, { useState } from "react";
 import Layout from "../../componentes/layout";
 import api from "../../utils/api";
+import { CPF, Cliente, Telefone } from "../../utils/interfaces";
 
-interface RG {
-  valor: string;
-  dataEmissao: string; // Alterado para string
-}
 
-interface CPF {
-  valor: string;
-  dataEmissao: string; // Alterado para string
-}
-
-interface Telefone {
-  ddd: string; // Adicionado DDD
-  numero: string;
-}
-
-interface Cliente {
-  nome: string;
-  nomeSocial: string;
-  email: string;
-  cpf: CPF;
-  rgs: RG[];
-  telefones: Telefone[];
-}
 
 const FormularioCadastroCliente: React.FC = () => {
   const [cliente, setCliente] = useState<Cliente>({
     nome: "",
     nomeSocial: "",
-    email: "",
     cpf: { valor: "", dataEmissao: "" },
     rgs: [{ valor: "", dataEmissao: "" }],
     telefones: [{ ddd: "", numero: "" }],
@@ -147,18 +125,6 @@ const FormularioCadastroCliente: React.FC = () => {
           />
         </div>
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="email">
-            Email:
-          </label>
-          <input
-            type="email"
-            name="email"
-            value={cliente.email}
-            onChange={handleChange}
-            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
-        <div className="mb-4">
           <label className="block text-gray-700 font-bold mb-2" htmlFor="cpf">
             CPF:
           </label>
@@ -194,7 +160,7 @@ const FormularioCadastroCliente: React.FC = () => {
               </label>
               <input
                 type="text"
-                name="rg"
+                name="valor"
                 value={rg.valor}
                 onChange={handleRGChange(index)}
                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"

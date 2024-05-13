@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import Layout from "../../componentes/layout";
 import api from "../../utils/api";
-import { ClienteCompletoProps } from "./editarCliente";
+import { ClienteCompletoProps } from "../../utils/interfaces";
 
 const Clientes = () => {
   const [clientes, setClientes] = useState<ClienteCompletoProps[]>([]);
@@ -15,6 +15,19 @@ const Clientes = () => {
     fetchClientes();
   }, []);
 
+  const handleDelete = async (id: number) => {
+    const response = await api.delete(`/cliente/deletar/${id}`);
+    try {
+      if (response.status === 200) {
+        alert("Cliente deletado com sucesso");
+        fetchClientes();
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Erro ao deletar cliente");
+    }
+  }
+
   return (
     <Layout>
       <div className="flex flex-col gap-5 my-10">
@@ -25,7 +38,7 @@ const Clientes = () => {
           </button>
         </a>
       </div>
-      <div>
+      <div className="gap-5 flex flex-col">
         {clientes.map((cliente) => (
           <div className="flex flex-col items-start md:flex-row gap-5 md:items-center bg-neutral-200 p-3 rounded-md shadow-md">
             <p className="">ID: {cliente.id}</p>
@@ -43,7 +56,7 @@ const Clientes = () => {
                   Editar
                 </button>
               </a>
-              <button className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded">
+              <button className="bg-red-500 hover:bg-red-600 text-white py-1 px-3 rounded" onClick={() => handleDelete(cliente.id)}>
                 Deletar
               </button>
             </div>

@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Layout from "../../componentes/layout";
-import { ProdutoServicoProps } from "../../componentes/produtoServico";
+import api from "../../utils/api";
+import { useParams } from "react-router-dom";
 
 interface RG {
   valor: string;
@@ -17,38 +18,53 @@ interface Telefone {
   numero: string;
 }
 
-export interface ClienteCompletoProps {
-  id: number;
+interface Cliente {
   nome: string;
   nomeSocial: string;
   cpf: CPF;
-  rgs?: RG[];
-  telefones?: Telefone[];
-  produtosConsumidos?: ProdutoServicoProps[];
-  servicosConsumidos?: ProdutoServicoProps[];
+  rgs: RG[];
+  telefones: Telefone[];
 }
 
-export interface FormularioEditarClienteProps {
-  id: number;
-  nome: string;
-  nomeSocial: string;
-  cpf: CPF;
-  rg: RG[];
-  telefone: Telefone[];
-}
 
-const FormularioEditarCliente = () => {
-  const [cliente, setCliente] = useState<FormularioEditarClienteProps>({
-    id: 0,
+const FormularioCadastroCliente: React.FC = () => {
+  const { id } = useParams();
+
+  const [cliente, setCliente] = useState<Cliente>({
     nome: "",
     nomeSocial: "",
     cpf: { valor: "", dataEmissao: "" },
-    rg: [{ valor: "", dataEmissao: "" }],
-    telefone: [{ ddd: "", numero: "" }],
+    rgs: [{ valor: "", dataEmissao: "" }],
+    telefones: [{ ddd: "", numero: "" }],
   });
 
+  useEffect(() => {
+    fetchClienteInfo();
+  }, []);
+
+
+  const fetchClienteInfo = async () => {
+    try {
+      const response = await api.get(`/cliente/achar/${id}`);
+      setCliente(response.data);
+      setCliente({
+        ...response.data,
+        rgs: [],
+        telefones: response.data.telefones.map((tel: any) => ({
+          ddd: tel.ddd,
+          numero: tel.numero,
+        })),
+
+      })
+    } catch (error) {
+      alert("Erro ao buscar cliente");
+    }
+  }
+
   const handleChange = (
-    event: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>
+    event:
+      | React.ChangeEvent<HTMLInputElement>
+      | React.ChangeEvent<HTMLSelectElement>
   ) => {
     const { name, value } = event.target;
     setCliente((prevState) => ({
@@ -62,7 +78,7 @@ const FormularioEditarCliente = () => {
       const { name, value } = event.target;
       setCliente((prevState) => ({
         ...prevState,
-        rg: prevState.rg.map((rg, i) =>
+        rgs: prevState.rgs.map((rg, i) =>
           i === index ? { ...rg, [name]: value } : rg
         ),
       }));
@@ -73,7 +89,7 @@ const FormularioEditarCliente = () => {
       const { name, value } = event.target;
       setCliente((prevState) => ({
         ...prevState,
-        telefone: prevState.telefone.map((tel, i) =>
+        telefones: prevState.telefones.map((tel, i) =>
           i === index ? { ...tel, [name]: value } : tel
         ),
       }));
@@ -82,40 +98,47 @@ const FormularioEditarCliente = () => {
   const addRG = () => {
     setCliente((prevState) => ({
       ...prevState,
-      rg: [...prevState.rg, { valor: "", dataEmissao: "" }],
+      rgs: [...prevState.rgs, { valor: "", dataEmissao: "" }],
     }));
   };
 
   const removeRG = (index: number) => () => {
     setCliente((prevState) => ({
       ...prevState,
-      rg: prevState.rg.filter((rg, i) => i !== index),
+      rgs: prevState.rgs.filter((rg, i) => i !== index),
     }));
   };
 
   const addTelefone = () => {
     setCliente((prevState) => ({
       ...prevState,
-      telefone: [...prevState.telefone, { ddd: "", numero: "" }],
+      telefones: [...prevState.telefones, { ddd: "", numero: "" }],
     }));
   };
 
   const removeTelefone = (index: number) => () => {
     setCliente((prevState) => ({
       ...prevState,
-      telefone: prevState.telefone.filter((tel, i) => i !== index),
+      telefones: prevState.telefones.filter((tel, i) => i !== index),
     }));
   };
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(cliente);
-    // Aqui você pode enviar os dados para o servidor
+    try {
+      const response = await api.post(`/cliente/editar/${id}`, cliente);
+      if (response.status === 200) {
+        alert("Cliente editado com sucesso!");
+      }
+    } catch (error) {
+      alert("Erro ao editar cliente");
+    }
   };
 
   return (
     <Layout>
-      <h1 className="text-3xl font-bold m-8">Editar cliente</h1>
+      <h1 className="text-3xl font-bold m-8 text-center">Editar cliente</h1>
 
       <form
         onSubmit={handleSubmit}
@@ -148,33 +171,9 @@ const FormularioEditarCliente = () => {
             className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
           />
         </div>
+
         <div className="mb-4">
-          <label className="block text-gray-700 font-bold mb-2" htmlFor="cpf">
-            CPF:
-          </label>
-          <input
-            type="text"
-            name="cpf"
-            value={cliente.cpf.valor}
-            onChange={handleChange}
-            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-          <label
-            className="block text-gray-700 font-bold mb-2"
-            htmlFor="cpfDataEmissao"
-          >
-            Data de Emissão do CPF:
-          </label>
-          <input
-            type="date"
-            name="cpfDataEmissao"
-            value={cliente.cpf.dataEmissao}
-            onChange={handleChange}
-            className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-          />
-        </div>
-        <div className="mb-4">
-          {cliente.rg.map((rg, index) => (
+          {cliente.rgs.map((rg, index) => (
             <div key={index}>
               <label
                 className="block text-gray-700 font-bold mb-2"
@@ -184,7 +183,7 @@ const FormularioEditarCliente = () => {
               </label>
               <input
                 type="text"
-                name="rg"
+                name="valor"
                 value={rg.valor}
                 onChange={handleRGChange(index)}
                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -197,7 +196,7 @@ const FormularioEditarCliente = () => {
               </label>
               <input
                 type="date"
-                name="rgDataEmissao"
+                name="dataEmissao"
                 value={rg.dataEmissao}
                 onChange={handleRGChange(index)}
                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -220,7 +219,7 @@ const FormularioEditarCliente = () => {
           </button>
         </div>
         <div className="mb-4">
-          {cliente.telefone.map((tel, index) => (
+          {cliente.telefones.map((tel, index) => (
             <div key={index}>
               <label
                 className="block text-gray-700 font-bold mb-2"
@@ -272,4 +271,4 @@ const FormularioEditarCliente = () => {
   );
 };
 
-export default FormularioEditarCliente;
+export default FormularioCadastroCliente;

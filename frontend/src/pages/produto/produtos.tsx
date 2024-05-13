@@ -1,9 +1,8 @@
 import React, { useEffect, useState } from "react";
-import ProdutoServico, {
-  ProdutoServicoProps,
-} from "../../componentes/produtoServico";
+import ProdutoServico from "../../componentes/produtoServico";
 import Layout from "../../componentes/layout";
 import api from "../../utils/api";
+import { ProdutoServicoProps } from "../../utils/interfaces";
 
 const Produtos = () => {
   const [produtos, setProdutos] = useState<ProdutoServicoProps[]>([]);

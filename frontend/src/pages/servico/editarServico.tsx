@@ -15,7 +15,7 @@ const FormularioEditarServico = () => {
   }, []);
 
   const getServiceInfo = async () => {
-    const response = await api.get(`/servico/${id}`);
+    const response = await api.get(`/servico/achar/${id}`);
 
     setNome(response.data.nome);
     setValor(response.data.valor);
@@ -29,11 +29,11 @@ const FormularioEditarServico = () => {
       .put(`/servico/${id}`, { nome, valor, tipo, raca })
       .then((response) => {
         if (response.status === 200) {
-          alert("Serviço cadastrado com sucesso!");
+          alert("Serviço editado com sucesso!");
         }
       })
       .catch((error) => {
-        alert("Erro ao cadastrar serviço!");
+        alert("Erro ao editar serviço!");
       });
   };
 
@@ -93,7 +93,7 @@ const FormularioEditarServico = () => {
             type="submit"
             className="bg-blue-400 p-2 w-full rounded-md text-2xl font-bold text-white"
           >
-            Cadastrar serviço
+            Editar serviço
           </button>
         </div>
       </form>

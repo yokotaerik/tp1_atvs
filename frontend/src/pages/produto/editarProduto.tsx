@@ -15,7 +15,7 @@ const FormularioEditarProduto = () => {
   }, []);
 
   const getProductInfo = async () => {
-    const response = await api.get(`/produto/${id}`);
+    const response = await api.get(`/produto/achar/${id}`);
 
     setNome(response.data.nome);
     setValor(response.data.valor);
@@ -29,11 +29,11 @@ const FormularioEditarProduto = () => {
       .put(`/produto/${id}`, { nome, valor, tipo, raca })
       .then((response) => {
         if (response.status === 200) {
-          alert("Produto cadastrado com sucesso!");
+          alert("Produto editado com sucesso!");
         }
       })
       .catch((error) => {
-        alert("Erro ao cadastrar produto!");
+        alert("Erro ao editar produto!");
       });
   };
 
@@ -93,7 +93,7 @@ const FormularioEditarProduto = () => {
             type="submit"
             className="bg-blue-400 p-2 w-full rounded-md text-2xl font-bold text-white"
           >
-            Cadastrar produto
+            Editar produto
           </button>
         </div>
       </form>

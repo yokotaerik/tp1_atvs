@@ -1,4 +1,3 @@
-import React from "react";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import Home from "../pages/home";
 import FormularioCadastroCliente from "../pages/cliente/formularioCadastroCliente";
@@ -50,7 +49,7 @@ const AppRouter = () => {
           path="/clientes/consumidores"
           element={<ClientesConsumidores />}
         />
-        <Route path="/clientes/consumir" element={<Consumir />} />
+        <Route path="/clientes/consumir/:id" element={<Consumir />} />
         <Route path="/mais_consumidos" element={<MaisConsumidos />} />
       </Routes>
     </BrowserRouter>

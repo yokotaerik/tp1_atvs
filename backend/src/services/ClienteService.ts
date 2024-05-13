@@ -44,18 +44,23 @@ class ClienteService {
     return clientes;
   }
 
-  async consumirProduto(clienteId: number, produtoId: number) {
-    const produtoConsumido = await prisma.cliente.update({
-      where: { id: clienteId },
-      data: {
-        produtosConsumidos: {
-          connect: {
-            id: produtoId,
+  async consumirProduto(clienteId: number, produtoId: number, qnt: number) {
+    let produtoConsumidos: any = [];
+
+    for (let i = 0; i < qnt; i++) {
+      const produtoConsumido = await prisma.cliente.update({
+        where: { id: clienteId },
+        data: {
+          produtosConsumidos: {
+            connect: {
+              id: produtoId,
+            },
           },
         },
-      },
-    });
-    return produtoConsumido;
+      });
+      produtoConsumidos.push(produtoConsumido);
+    }
+    return produtoConsumidos;
   }
 
   async consumirServico(clienteId: number, servicoId: number) {

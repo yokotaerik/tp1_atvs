@@ -13,7 +13,11 @@ const FormularioCadastroProduto = () => {
     api
       .post("/produto/cadastrar", { nome, valor, tipo, raca })
       .then((response) => {
-        if (response.status === 200) {
+        if (response.status === 201) {
+          setNome("");
+          setValor("");
+          setTipo("");
+          setRaca("");
           alert("Produto cadastrado com sucesso!");
         }
       })
