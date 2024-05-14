@@ -21,8 +21,8 @@ model Servico {
   valor     Float
   raca      String
   tipo      String // Pode precisar de refinamento dependendo do contexto
-  cliente   Cliente? @relation(fields: [clienteId], references: [id])
-  clienteId Int?
+  vezesConsumidas Int     @default(0)
+  clientes  ClienteServico[] // Relação inversa com ClienteServico
 }
 
 model RG {
@@ -40,6 +40,7 @@ model Produto {
   valor    Float
   raca     String
   tipo     String // Pode precisar de refinamento dependendo do contexto
+  vezesConsumidas Int     @default(0)
   clientes ClienteProduto[] // Relação inversa com ClienteProduto
 }
 
@@ -61,8 +62,10 @@ model Cliente {
   rgs                RG[]
   cpf                CPF?
   produtosConsumidos ClienteProduto[]
-  servicosConsumidos Servico[]
+  servicosConsumidos ClienteServico[]
   pets               Pet[]
+  valorConsumido     Int             @default(0)
+  vezesConsumida     Int             @default(0)
 }
 
 model Pet {
@@ -85,3 +88,16 @@ model ClienteProduto {
 
   @@unique([clienteId, produtoId])
 }
+
+
+model ClienteServico {
+  id                Int     @id @default(autoincrement())
+  cliente           Cliente @relation(fields: [clienteId], references: [id])
+  clienteId         Int
+  servico           Servico @relation(fields: [servicoId], references: [id])
+  servicoId         Int
+  quantidadeDeVezes Int     @default(0)
+
+  @@unique([clienteId, servicoId])
+}
+

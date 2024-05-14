@@ -1,8 +1,6 @@
 import { Request, Response } from "express";
 import prisma from "../prisma";
-import ClienteService from "../services/ClienteService";
 
-const clienteService = new ClienteService();
 export class ClienteController {
   private repository = prisma.cliente;
 
@@ -208,7 +206,7 @@ export class ClienteController {
     }
   }
 
-  async consumirProduto(req: Request, res: Response) {
+  public async consumirProduto(req: Request, res: Response) {
     const clienteId = Number(req.body.clienteId);
     const produtoId = Number(req.body.produtoId);
     const qnt = Number(req.body.quantidade);
@@ -223,8 +221,6 @@ export class ClienteController {
         return res.status(404).json({ error: "Cliente não encontrado" });
       }
 
-      let produtosConsumidos = [];
-
       // Verifica se o cliente já consumiu o produto
       const produtoCliente = await prisma.clienteProduto.findFirst({
         where: {
@@ -232,6 +228,30 @@ export class ClienteController {
           produtoId,
         },
       });
+
+      const produto = await prisma.produto.update({
+        where: { id: produtoId },
+        data: {
+          vezesConsumidas: {
+            increment: qnt,
+          },
+        },
+      });
+
+      if (produto) {
+        await prisma.cliente.update({
+          where: { id: clienteId },
+          data: {
+            valorConsumido: {
+              increment: produto?.valor * qnt,
+            },
+
+            vezesConsumida: {
+              increment: qnt,
+            },
+          },
+        });
+      }
 
       if (produtoCliente) {
         const novaQuantidade = (produtoCliente.quantidadeDeVezes += qnt);
@@ -262,9 +282,73 @@ export class ClienteController {
   public async consumirServico(req: Request, res: Response) {
     const { clienteId, servicoId } = req.body;
     try {
-      clienteService.consumirServico(clienteId, servicoId);
-      return res.status(200).json({ message: "servico consumido com sucesso" });
+      const cliente = await prisma.cliente.findUnique({
+        where: { id: clienteId },
+        include: { servicosConsumidos: true }, // Inclui os produtos consumidos atualmente pelo cliente
+      });
+
+      if (!cliente) {
+        return res.status(404).json({ error: "Cliente não encontrado" });
+      }
+
+      let produtosConsumidos = [];
+
+      // Verifica se o cliente já consumiu o produto
+      const servicoCliente = await prisma.clienteServico.findFirst({
+        where: {
+          clienteId,
+          servicoId,
+        },
+      });
+
+      const servico = await prisma.servico.update({
+        where: { id: servicoId },
+        data: {
+          vezesConsumidas: {
+            increment: 1,
+          },
+        },
+      });
+
+      if (servico) {
+        await prisma.cliente.update({
+          where: { id: clienteId },
+          data: {
+            valorConsumido: {
+              increment: servico?.valor,
+            },
+
+            vezesConsumida: {
+              increment: 1,
+            },
+          },
+        });
+      } else {
+        throw new Error("Serviço não encontrado");
+      }
+
+      if (servicoCliente) {
+        const novaQuantidade = (servicoCliente.quantidadeDeVezes += 1);
+        const servicoConsumido = await prisma.clienteProduto.update({
+          where: { id: servicoCliente.id },
+          data: {
+            quantidadeDeVezes: novaQuantidade,
+          },
+        });
+        res.status(200).json(servicoConsumido);
+      } else {
+        const novoServicoConsumido = await prisma.clienteServico.create({
+          data: {
+            clienteId,
+            servicoId,
+            quantidadeDeVezes: 1,
+          },
+        });
+
+        res.status(200).json(novoServicoConsumido);
+      }
     } catch (error) {
+      console.log(error);
       return res.status(500).json({ error: "Erro ao consumir servico" });
     }
   }
@@ -298,4 +382,5 @@ export class ClienteController {
       return res.status(500).json({ error: "Erro ao deletar cliente" });
     }
   }
+
 }

@@ -19,6 +19,7 @@ import {
   getPetById,
 } from "./controller/PetController";
 import { ClienteController } from "./controller/ClienteController";
+import { getMelhoresConsumidoresPorQuantidade, getMelhoresConsumidoresPorValor, getProdutosMaisConsumidos, getServicosMaisConsumidos } from "./controller/GerenciamentoController";
 
 const router = express.Router();
 
@@ -49,5 +50,22 @@ router.get("/servico/achar/:id", getServicoById);
 router.post("/servico/cadastrar", createServico);
 router.put("/servico/:id", updateServicoById);
 router.delete("/servico/:id", deleteServicoById);
+// Gerenciamento
+router.get(
+  "/gerenciamento/melhoresConsumidoresPorValor",
+  getMelhoresConsumidoresPorValor
+);
+router.get(
+  "/gerenciamento/melhoresConsumidoresPorQuantidade",
+  getMelhoresConsumidoresPorQuantidade
+)
+router.get(
+  "/gerenciamento/produtosMaisConsumidos",
+  getProdutosMaisConsumidos
+)
+router.get(
+  "/gerenciamentoserviçosMaisConsumidos",
+  getServicosMaisConsumidos
+)
 
 export default router;
