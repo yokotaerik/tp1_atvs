@@ -18,6 +18,11 @@ const MaisConsumidos = () => {
     getServicos();
   }, []);
 
+  useEffect(() => {
+    getProdutos();
+    getServicos();
+  }, []);
+
   const getProdutos = async () => {
     const response = await api.get("/gerenciamento/produtosMaisConsumidos");
     setProdutos(response.data);

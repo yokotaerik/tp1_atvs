@@ -10,7 +10,7 @@ export const createProduto = async (req: Request, res: Response) => {
     const produto = await repository.create({
       data: {
         nome,
-        valor: Number(valor.replace(",", ".")),
+        valor,
         raca,
         tipo,
       },
@@ -61,7 +61,7 @@ export const updateProdutoById = async (req: Request, res: Response) => {
     // Encontre o produto pelo ID no banco de dados e atualize seus dados
     const updatedProduto = await repository.update({
       where: { id: Number(id) },
-      data: { nome, tipo, raca, valor: Number(valor.replace(",", ".")) },
+      data: { nome, tipo, raca, valor},
     });
 
     if (!updatedProduto) {
@@ -70,6 +70,7 @@ export const updateProdutoById = async (req: Request, res: Response) => {
 
     res.status(200).json(updatedProduto);
   } catch (error) {
+    console.log(error)
     res.status(500).json({ error: "Erro ao atualizar o produto pelo ID" });
   }
 };

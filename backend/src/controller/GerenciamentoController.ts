@@ -13,6 +13,12 @@ export const getMelhoresConsumidoresPorValor = async (
       include: {
         cpf: true,
       },
+      take: 5,
+      where: {
+        vezesConsumida: {
+          gt: 0,
+        },
+      },
     });
 
     res.status(200).json(melhoresConsumidores);
@@ -33,6 +39,12 @@ export const getMelhoresConsumidoresPorQuantidade = async (
       include: {
         cpf: true,
       },
+      take: 10,
+      where: {
+        vezesConsumida: {
+          gt: 0,
+        },
+      },
     });
 
     res.status(200).json(melhoresConsumidores);
@@ -49,6 +61,11 @@ export const getProdutosMaisConsumidos = async (
     const produtos = await prisma.produto.findMany({
       orderBy: {
         vezesConsumidas: "desc",
+      },
+      where: {
+        vezesConsumidas: {
+          gt: 0,
+        },
       },
     });
 
@@ -68,6 +85,11 @@ export const getServicosMaisConsumidos = async (
     const servicos = await prisma.servico.findMany({
       orderBy: {
         vezesConsumidas: "desc",
+      },
+      where: {
+        vezesConsumidas: {
+          gt: 0,
+        },
       },
     });
 

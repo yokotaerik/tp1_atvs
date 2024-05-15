@@ -1,29 +1,36 @@
 import React, { useState } from "react";
 import Layout from "../../componentes/layout";
 import api from "../../utils/api";
+import useProduto from "../../hooks/useProduto";
 
 const FormularioCadastroProduto = () => {
-  const [nome, setNome] = useState("");
-  const [valor, setValor] = useState("");
-  const [tipo, setTipo] = useState("");
-  const [raca, setRaca] = useState("");
+  const { adicionarProduto } = useProduto();
+  const [produto, setProduto] = useState({
+    nome: "",
+    valor: "",
+    tipo: "",
+    raca: ""
+  });
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setProduto((prevProduto) => ({
+      ...prevProduto,
+      [name]: value
+    }));
+  };
+
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    api
-      .post("/produto/cadastrar", { nome, valor, tipo, raca })
-      .then((response) => {
-        if (response.status === 201) {
-          setNome("");
-          setValor("");
-          setTipo("");
-          setRaca("");
-          alert("Produto cadastrado com sucesso!");
-        }
-      })
-      .catch((error) => {
-        alert("Erro ao cadastrar produto!");
+    const sucess = await adicionarProduto(produto.nome, Number(produto.valor), produto.tipo, produto.raca);
+    if (sucess) {
+      setProduto({
+        nome: "",
+        valor: "",
+        tipo: "",
+        raca: ""
       });
+    }
   };
 
   return (
@@ -39,9 +46,10 @@ const FormularioCadastroProduto = () => {
             className="w-full rounded-md p-2"
             type="text"
             id="nome"
+            name="nome"
             placeholder="Nome"
-            value={nome}
-            onChange={(e) => setNome(e.target.value)}
+            value={produto.nome}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -50,9 +58,10 @@ const FormularioCadastroProduto = () => {
             className="w-full rounded-md p-2"
             type="text"
             id="valor"
+            name="valor"
             placeholder="Valor"
-            value={valor}
-            onChange={(e) => setValor(e.target.value)}
+            value={produto.valor}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -61,9 +70,10 @@ const FormularioCadastroProduto = () => {
             className="w-full rounded-md p-2"
             type="text"
             id="tipo"
+            name="tipo"
             placeholder="Tipo"
-            value={tipo}
-            onChange={(e) => setTipo(e.target.value)}
+            value={produto.tipo}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -72,9 +82,10 @@ const FormularioCadastroProduto = () => {
             className="w-full rounded-md p-2"
             type="text"
             id="raca"
+            name="raca"
             placeholder="Raça"
-            value={raca}
-            onChange={(e) => setRaca(e.target.value)}
+            value={produto.raca}
+            onChange={handleChange}
           />
         </div>
         <div>

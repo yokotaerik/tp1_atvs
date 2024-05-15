@@ -1,10 +1,11 @@
 import { useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../componentes/layout";
 import api from "../../utils/api";
 
 const FormularioCadastrarPet = () => {
   const { id } = useParams();
+  let nav = useNavigate();
 
   const [nome, setNome] = useState("");
   const [tipo, setTipo] = useState("");
@@ -25,6 +26,7 @@ const FormularioCadastrarPet = () => {
         setRaca("");
         setGenero("");
         alert("Pet cadastrado com sucesso");
+        nav(`/cliente/${id}`);
       }
     } catch (error) {
       console.error(error);

@@ -41,7 +41,7 @@ const Clientes = () => {
       <div className="gap-5 flex flex-col">
         {clientes.map((cliente) => (
           <div className="flex flex-col items-start md:flex-row gap-5 md:items-center bg-neutral-200 p-3 rounded-md shadow-md">
-            <p className="">ID: {cliente.id}</p>
+            <p className="">Código: {cliente.id}</p>
             <p className="">Nome: {cliente.nome}</p>
             <p className="">Nome social: {cliente.nomeSocial}</p>
             <p className="">CPF: {cliente.cpf.valor}</p>

@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import Layout from "../../componentes/layout";
 import axios from "axios";
 import api from "../../utils/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const FormularioEditarPet = () => {
   const [nome, setNome] = useState("");
@@ -10,7 +10,7 @@ const FormularioEditarPet = () => {
   const [raca, setRaca] = useState("");
   const [genero, setGenero] = useState("");
   const { id } = useParams();
-
+  const nav = useNavigate();
   const handleUpdate = () => {
     try {
       api.put(`/pet/${id}`, {
@@ -35,6 +35,7 @@ const FormularioEditarPet = () => {
         setTipo(petData.tipo);
         setRaca(petData.raca);
         setGenero(petData.genero);
+        nav(`/cliente/${id}`);
       } catch (error) {
         alert("Erro ao obter os dados do pet");
       }

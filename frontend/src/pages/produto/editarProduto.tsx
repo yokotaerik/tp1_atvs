@@ -2,8 +2,10 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../componentes/layout";
 import api from "../../utils/api";
 import { useParams } from "react-router-dom";
+import useProduto from "../../hooks/useProduto";
 
 const FormularioEditarProduto = () => {
+  const { atualizarProduto, } = useProduto();
   const { id } = useParams();
   const [nome, setNome] = useState("");
   const [valor, setValor] = useState("");
@@ -25,16 +27,7 @@ const FormularioEditarProduto = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    api
-      .put(`/produto/${id}`, { nome, valor, tipo, raca })
-      .then((response) => {
-        if (response.status === 200) {
-          alert("Produto editado com sucesso!");
-        }
-      })
-      .catch((error) => {
-        alert("Erro ao editar produto!");
-      });
+    atualizarProduto(Number(id), nome, Number(valor), tipo, raca);
   };
 
   return (

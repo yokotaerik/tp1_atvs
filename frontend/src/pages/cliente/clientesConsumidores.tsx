@@ -36,7 +36,7 @@ const ClientesConsumidores = () => {
               key={cliente.id}
               className="mb-4 bg-gray-100 shadow-md rounded-lg px-4 py-2 "
             >
-              <p className="font-semibold">ID: {cliente.id}</p>
+              <p className="font-semibold">Código: {cliente.id}</p>
               <p className="text-gray-600">Nome: {cliente.nome}</p>
               <p className="text-gray-600">
                 Valor Total: R$ {cliente.valorConsumido}
@@ -55,7 +55,7 @@ const ClientesConsumidores = () => {
               key={cliente.id}
               className="mb-4 bg-gray-100 shadow-md rounded-lg px-4 py-2 "
             >
-              <p className="font-semibold">ID: {cliente.id}</p>
+              <p className="font-semibold">Código: {cliente.id}</p>
               <p className="text-gray-600">Nome: {cliente.nome}</p>
               <p className="text-gray-600">
                 Quantidade Total: {cliente.vezesConsumida}

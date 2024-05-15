@@ -62,34 +62,43 @@ export class ClienteController {
         return res.status(400).json({ error: "Campos inválidos" });
       }
 
-      const cliente = await this.repository.create({
-        data: {
-          nome,
-          nomeSocial,
-          dataCadastro: new Date(),
-        },
+      const criacao = await prisma.$transaction(async (prisma) => {
+        const cliente = await prisma.cliente.create({
+          data: {
+            nome,
+            nomeSocial,
+            dataCadastro: new Date(),
+          },
+        });
+
+        await this.adicionarCPF(prisma, cliente.id, cpf, cpfDataEmissao);
+
+        if (rgs.length > 0) {
+          for (const rg of rgs) {
+            await this.adicionarRG(
+              prisma,
+              cliente.id,
+              rg.valor,
+              rg.dataEmissao
+            );
+          }
+        }
+
+        if (telefones.length > 0) {
+          for (const telefone of telefones) {
+            await this.adicionarTelefone(
+              prisma,
+              cliente.id,
+              telefone.ddd,
+              telefone.numero
+            );
+          }
+        }
+
+        return cliente;
       });
 
-      await this.adicionarCPF(cliente.id, cpf, cpfDataEmissao);
-
-      if (telefones.length > 0) {
-        telefones.forEach(async (telefone: any) => {
-          await this.adicionarTelefone(
-            cliente.id,
-            telefone.ddd,
-            telefone.numero
-          );
-        });
-      }
-
-      if (rgs.length > 0) {
-        rgs.forEach(async (rg: any) => {
-          console.log(rg);
-          await this.adicionarRG(cliente.id, rg.valor, rg.dataEmissao);
-        });
-      }
-
-      res.status(201).json(cliente);
+      res.status(201).json(criacao);
     } catch (error) {
       console.log(error);
       res.status(500).json({ error: "Erro ao criar um novo cliente" });
@@ -127,12 +136,12 @@ export class ClienteController {
 
       // Adiciona os novos telefones
       for (const telefone of telefones) {
-        await this.adicionarTelefone(id, telefone.ddd, telefone.numero);
+        await this.adicionarTelefone(prisma, id, telefone.ddd, telefone.numero);
       }
 
       // Adiciona os novos RGs
       for (const rg of rgs) {
-        await this.adicionarRG(id, rg.valor, rg.dataEmissao);
+        await this.adicionarRG(prisma, id, rg.valor, rg.dataEmissao);
       }
 
       res.status(200).json(clienteAtualizado);
@@ -143,6 +152,7 @@ export class ClienteController {
   };
 
   private async adicionarTelefone(
+    prisma: any,
     clienteId: number,
     ddd: string,
     numero: string
@@ -162,6 +172,7 @@ export class ClienteController {
   }
 
   private async adicionarRG(
+    prisma: any,
     clienteId: number,
     valor: string,
     dataEmissao: string
@@ -184,6 +195,7 @@ export class ClienteController {
   }
 
   private async adicionarCPF(
+    prisma: any,
     clienteId: number,
     valor: string,
     dataEmissao: string
@@ -373,6 +385,14 @@ export class ClienteController {
 
       // Depois, exclua os CPFs associados ao cliente
       await prisma.cPF.deleteMany({
+        where: { clienteId },
+      });
+
+      await prisma.clienteProduto.deleteMany({
+        where: { clienteId },
+      });
+
+      await prisma.clienteServico.deleteMany({
         where: { clienteId },
       });
 

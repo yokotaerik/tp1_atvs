@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Layout from "../../componentes/layout";
 import api from "../../utils/api";
 import { CPF, Cliente, Telefone } from "../../utils/interfaces";
+import { useNavigate } from "react-router-dom";
 
 
 
@@ -13,6 +14,7 @@ const FormularioCadastroCliente: React.FC = () => {
     rgs: [{ valor: "", dataEmissao: "" }],
     telefones: [{ ddd: "", numero: "" }],
   });
+  let nav = useNavigate();
 
   const handleChange = (
     event:
@@ -84,6 +86,7 @@ const FormularioCadastroCliente: React.FC = () => {
       if (response.status === 201) {
         alert("Cliente cadastrado com sucesso!");
       }
+      nav("/clientes")
     } catch (error) {
       alert("Erro ao cadastrar cliente");
     }

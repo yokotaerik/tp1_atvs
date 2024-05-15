@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../componentes/layout";
 import api from "../../utils/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 const FormularioEditarServico = () => {
   const { id } = useParams();
@@ -9,6 +9,7 @@ const FormularioEditarServico = () => {
   const [valor, setValor] = useState("");
   const [tipo, setTipo] = useState("");
   const [raca, setRaca] = useState("");
+  let nav = useNavigate();
 
   useEffect(() => {
     getServiceInfo();
@@ -30,6 +31,8 @@ const FormularioEditarServico = () => {
       .then((response) => {
         if (response.status === 200) {
           alert("Serviço editado com sucesso!");
+          nav("/servico");
+
         }
       })
       .catch((error) => {

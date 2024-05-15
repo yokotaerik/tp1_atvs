@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import Layout from "../../componentes/layout";
 import api from "../../utils/api";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
 interface RG {
   valor: string;
@@ -29,6 +29,8 @@ interface Cliente {
 
 const FormularioCadastroCliente: React.FC = () => {
   const { id } = useParams();
+  let nav = useNavigate()
+
 
   const [cliente, setCliente] = useState<Cliente>({
     nome: "",
@@ -130,6 +132,8 @@ const FormularioCadastroCliente: React.FC = () => {
       const response = await api.post(`/cliente/editar/${id}`, cliente);
       if (response.status === 200) {
         alert("Cliente editado com sucesso!");
+        nav("/clientes");
+
       }
     } catch (error) {
       alert("Erro ao editar cliente");

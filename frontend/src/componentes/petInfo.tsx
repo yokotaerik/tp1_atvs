@@ -29,7 +29,7 @@ const PetInfo = ({ id, nome, tipo, raca, genero }: PetInfoProps) => {
   return (
     <div>
       <div className="bg-neutral-200 p-5 rounded-lg mb-5 shadow-md">
-        <p className="mb-1">ID: {id}</p>
+        <p className="mb-1">Código: {id}</p>
         <p className="mb-1">Nome: {nome}</p>
         <p className="mb-1">Tipo: {tipo}</p>
         <p className="mb-1">Raça: {raca}</p>

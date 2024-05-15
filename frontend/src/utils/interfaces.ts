@@ -13,6 +13,7 @@ export interface Telefone {
   numero: string;
 }
 
+
 export interface ClienteCompletoProps {
   id: number;
   nome: string;

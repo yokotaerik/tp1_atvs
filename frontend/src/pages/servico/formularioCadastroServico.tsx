@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import Layout from "../../componentes/layout";
 import api from "../../utils/api";
+import { useNavigate } from "react-router-dom";
 
 const FormularioCadastroServico = () => {
   const [nome, setNome] = useState("");
   const [valor, setValor] = useState("");
   const [tipo, setTipo] = useState("");
   const [raca, setRaca] = useState("");
+  let nav = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -19,6 +21,7 @@ const FormularioCadastroServico = () => {
           setTipo("");
           setRaca("");
           alert("Serviço cadastrado com sucesso!");
+          nav("/servico");
         }
       })
       .catch((error) => {
