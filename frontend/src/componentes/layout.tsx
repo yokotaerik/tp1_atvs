@@ -1,17 +1,15 @@
-import React from "react";
+import React, { ReactNode } from "react";
 
 interface LayoutProps {
-  children: React.ReactNode;
+  children: ReactNode;
 }
 
-class Layout extends React.Component<LayoutProps> {
-  render() {
-    return (
-      <div className="bg-white p-10 mt-10 rounded-2xl shadow-lg">
-        {this.props.children}
-      </div>
-    );
-  }
-}
+const Layout: React.FC<LayoutProps> = ({ children }) => {
+  return (
+    <div className="bg-white p-10 mt-10 rounded-2xl shadow-lg">
+      {children}
+    </div>
+  );
+};
 
 export default Layout;

@@ -64,7 +64,7 @@ router.get(
   getProdutosMaisConsumidos
 )
 router.get(
-  "/gerenciamentoserviçosMaisConsumidos",
+  "/gerenciamento/servicosMaisConsumidos",
   getServicosMaisConsumidos
 )
 

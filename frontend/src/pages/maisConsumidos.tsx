@@ -1,70 +1,53 @@
-import React from "react";
+import { useEffect, useState } from "react";
 import ProdutoServico from "../componentes/produtoServico";
 import Layout from "../componentes/layout";
-
-export interface ProdutoServicosConsumido {
-  id: number;
-  nome: string;
-  valor: number;
-  tipo: string;
-  raca: string;
-  quantidade: number;
-}
+import api from "../utils/api";
+import { ProdutoServicoPropsResponse } from "../utils/interfaces";
 
 const MaisConsumidos = () => {
-  const [produtos, setProdutos] = React.useState<ProdutoServicosConsumido[]>([
-    {
-      id: 1,
-      nome: "Ração",
-      valor: 100,
-      tipo: "Porte medio",
-      raca: "Pincher",
-      quantidade: 10,
-    },
-    {
-      id: 2,
-      nome: "Brinquedo",
-      valor: 50,
-      tipo: "Porte medio",
-      raca: "Poodle",
-      quantidade: 5,
-    },
-    {
-      id: 3,
-      nome: "Banho",
-      valor: 80,
-      tipo: "Porte medio",
-      raca: "Todas",
-      quantidade: 8,
-    },
-  ]);
+  const [produtos, setProdutos] = useState<ProdutoServicoPropsResponse[]>([]);
+  const [servicos, setServicos] = useState<ProdutoServicoPropsResponse[]>([]);
 
-  const [servicos, setServicos] = React.useState<ProdutoServicosConsumido[]>([
-    {
-      id: 1,
-      nome: "Banho",
-      valor: 100,
-      tipo: "Porte medio",
-      raca: "Pincher",
-      quantidade: 10,
-    },
-    {
-      id: 2,
-      nome: "Tosa",
-      valor: 50,
-      tipo: "Porte medio",
-      raca: "Poodle",
-      quantidade: 5,
-    },
-    {
-      id: 3,
-      nome: "Consulta",
-      valor: 800,
-      tipo: "Porte medio",
-      raca: "Todas",
-      quantidade: 8,
-    },
-  ]);
+  const [filtroRacaProduto, setFiltroRacaProduto] = useState("");
+  const [filtroTipoProduto, setFiltroTipoProduto] = useState("");
+  const [filtroRacaServico, setFiltroRacaServico] = useState("");
+  const [filtroTipoServico, setFiltroTipoServico] = useState("");
+
+  useEffect(() => {
+    getProdutos();
+    getServicos();
+  }, []);
+
+  const getProdutos = async () => {
+    const response = await api.get("/gerenciamento/produtosMaisConsumidos");
+    setProdutos(response.data);
+  };
+
+  const getServicos = async () => {
+    const response = await api.get("/gerenciamento/servicosMaisConsumidos");
+    setServicos(response.data);
+  };
+
+  const limparFiltros = () => {
+    setFiltroRacaProduto("");
+    setFiltroTipoProduto("");
+    setFiltroRacaServico("");
+    setFiltroTipoServico("");
+  };
+
+  const filtrarProdutos = (produto: ProdutoServicoPropsResponse) => {
+    return (
+      (!filtroRacaProduto || produto.raca.toLowerCase().includes(filtroRacaProduto.toLowerCase())) &&
+      (!filtroTipoProduto || produto.tipo.toLowerCase().includes(filtroTipoProduto.toLowerCase()))
+    );
+  };
+
+  const filtrarServicos = (servico: ProdutoServicoPropsResponse) => {
+    return (
+      (!filtroRacaServico || servico.raca.toLowerCase().includes(filtroRacaServico.toLowerCase())) &&
+      (!filtroTipoServico || servico.tipo.toLowerCase().includes(filtroTipoServico.toLowerCase()))
+    );
+  };
 
   return (
     <Layout>
@@ -76,20 +59,27 @@ const MaisConsumidos = () => {
           type="text"
           className="flex-auto bg-gray-100 shadow-md p-2 rounded-md my-4"
           placeholder="Filtre por tipo"
-          name="filtroTipo"
+          name="filtroTipoProduto"
+          value={filtroTipoProduto}
+          onChange={(e) => setFiltroTipoProduto(e.target.value)}
         />
         <input
           type="text"
           className="flex-auto bg-gray-100 shadow-md p-2 rounded-md my-4"
           placeholder="Filtre por raça"
-          name="filtroRaca"
+          name="filtroRacaProduto"
+          value={filtroRacaProduto}
+          onChange={(e) => setFiltroRacaProduto(e.target.value)}
         />
-        <button className="flex-none bg-blue-500 shadow-md p-2 rounded-md my-4 text-white">
+        <button
+          className="flex-none bg-blue-500 shadow-md p-2 rounded-md my-4 text-white"
+          onClick={limparFiltros}
+        >
           Limpar
         </button>
       </div>
 
-      {produtos.map((produto) => (
+      {produtos.filter(filtrarProdutos).map((produto) => (
         <div
           key={produto.id}
           className="flex flex-col md:flex-row gap-4 md:gap-8 items-center md:items-stretch mb-4 bg-gray-100 rounded-lg p-3 shadow-md"
@@ -102,7 +92,7 @@ const MaisConsumidos = () => {
             raca={produto.raca}
           />
           <p className="text-gray-600 mt-4 md:mt-0">
-            Consumidos: {produto.quantidade} vezes
+            Consumidos: {produto.vezesConsumidas} vezes
           </p>
         </div>
       ))}
@@ -115,32 +105,40 @@ const MaisConsumidos = () => {
           type="text"
           className="flex-auto bg-gray-100 shadow-md p-2 rounded-md my-4"
           placeholder="Filtre por tipo"
-          name="filtroTipo"
+          name="filtroTipoServico"
+          value={filtroTipoServico}
+          onChange={(e) => setFiltroTipoServico(e.target.value)}
         />
         <input
           type="text"
           className="flex-auto bg-gray-100 shadow-md p-2 rounded-md my-4"
           placeholder="Filtre por raça"
-          name="filtroRaca"
+          name="filtroRacaServico"
+          value={filtroRacaServico}
+          onChange={(e) => setFiltroRacaServico(e.target.value)}
         />
-        <button className="flex-none bg-blue-500 shadow-md p-2 rounded-md my-4 text-white">
+        <button
+          className="flex-none bg-blue-500 shadow-md p-2 rounded-md my-4 text-white"
+          onClick={limparFiltros}
+        >
           Limpar
         </button>
       </div>
-      {servicos.map((servicos) => (
+
+      {servicos.filter(filtrarServicos).map((servico) => (
         <div
-          key={servicos.id}
+          key={servico.id}
           className="flex flex-col md:flex-row gap-4 md:gap-8 items-center md:items-stretch mb-4 bg-gray-100 rounded-lg p-3 shadow-md"
         >
           <ProdutoServico
-            id={servicos.id}
-            nome={servicos.nome}
-            valor={servicos.valor}
-            tipo={servicos.tipo}
-            raca={servicos.raca}
+            id={servico.id}
+            nome={servico.nome}
+            valor={servico.valor}
+            tipo={servico.tipo}
+            raca={servico.raca}
           />
           <p className="text-gray-600 mt-4 md:mt-0">
-            Consumidos: {servicos.quantidade} vezes
+            Consumidos: {servico.vezesConsumidas} vezes
           </p>
         </div>
       ))}

@@ -36,18 +36,35 @@ const Consumir = () => {
     }
   };
 
-  const handleProductSubmit = (event: { preventDefault: () => void }) => {
+  const handleProductSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    api.post("/consumir/produto", {
-      clienteId: id,
-      produtoId: produtoSelecionado,
-      quantidade: quantidadeProdutos
+    try {
+      const response = await api.post("/consumir/produto", {
+        clienteId: id,
+        produtoId: produtoSelecionado,
+        quantidade: quantidadeProdutos,
+      });
+      if (response.status === 200) {
+        alert("Produto adicionado ao cliente com sucesso");
+      }
+    } catch (error) {
+      alert("Erro ao adicionar produto ao cliente");
     }
-    )
   };
 
-  const handleServiceSubmit = (event: { preventDefault: () => void }) => {
+  const handleServiceSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    try {
+      const response = await api.post("/consumir/servico", {
+        clienteId: Number(id),
+        servicoId: Number(servicoSelecionado),
+      });
+      if (response.status === 200) {
+        alert("Serviço adicionado ao cliente com sucesso");
+      }
+    } catch (error) {
+      alert("Erro ao adicionar serviço ao cliente");
+    }
   };
 
   return (
@@ -61,8 +78,8 @@ const Consumir = () => {
             className="bg-gray-200 py-2 rounded-md"
             value={produtoSelecionado}
             onChange={(event) => {
-              console.log(event.target.value)
-              setProdutoSelecionado(event.target.value)
+              console.log(event.target.value);
+              setProdutoSelecionado(event.target.value);
             }}
           >
             <option value="">Selecione um produto</option>

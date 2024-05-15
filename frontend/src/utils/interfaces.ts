@@ -31,6 +31,8 @@ export interface ClienteCompletoResponse {
   cpf: CPF;
   rgs?: RG[];
   telefones?: Telefone[];
+  valorConsumido: number
+  vezesConsumida: number
   produtosConsumidos?: any[];
   servicosConsumidos?: any[];
 }
@@ -52,6 +54,14 @@ export interface ProdutoServicoProps {
   raca: string;
 }
 
+export interface ProdutoServicoPropsResponse {
+  id: number;
+  nome: string;
+  valor: number;
+  tipo: string;
+  raca: string;
+  vezesConsumidas: number;
+}
 
 export interface Cliente {
     nome: string;

@@ -5,7 +5,10 @@ import Layout from "../../componentes/layout";
 import ProdutoServico from "../../componentes/produtoServico";
 import api from "../../utils/api";
 import { useParams } from "react-router-dom";
-import { ClienteCompletoProps, ClienteCompletoResponse } from "../../utils/interfaces";
+import {
+  ClienteCompletoProps,
+  ClienteCompletoResponse,
+} from "../../utils/interfaces";
 
 export type PetInfoProps = {
   id: string;
@@ -101,9 +104,9 @@ const Cliente = () => {
                     {/* <p className="text-gray-600"> */}
                     {/* Data de ocorência: {p.data.toLocaleDateString()} */}
                     {/* </p> */}
-                    <p
-                      className="text-gray-600"
-                    >Quantidade total de vezes consumida: {p.quantidadeDeVezes}</p>
+                    <p className="text-gray-600">
+                      Consumido: {p.quantidadeDeVezes} vezes
+                    </p>
                   </div>
                 ))}
             </div>
@@ -111,18 +114,17 @@ const Cliente = () => {
             <div className="flex flex-col gap-4">
               {cliente.servicosConsumidos &&
                 cliente.servicosConsumidos.length > 0 &&
-                cliente.servicosConsumidos.map((p) => (
+                cliente.servicosConsumidos.map((s) => (
                   <div className="flex flex-col items-start md:flex-row gap-5 md:items-center bg-neutral-200 p-3 rounded-md shadow-md ">
                     <ProdutoServico
-                      id={p.id}
-                      nome={p.nome}
-                      raca={p.raca}
-                      tipo={p.tipo}
-                      valor={p.valor}
+                      id={s.id}
+                      nome={s.servico.nome}
+                      raca={s.servico.raca}
+                      tipo={s.servico.tipo}
+                      valor={s.servico.valor}
                     />
                     <p className="text-gray-600">
-                      Data de ocorência:
-                      {/* {p.data.toLocaleDateString()} */}
+                      Consumido: {s.servico.vezesConsumidas} vezes
                     </p>
                   </div>
                 ))}
