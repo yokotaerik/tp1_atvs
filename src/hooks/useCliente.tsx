@@ -29,7 +29,6 @@ export interface Telefone {
 }
 
 const useCliente = () => {
-
   const listarTodos = async () => {
     const res = await fetch("http://localhost:32831/cliente/clientes").then(
       (res) => res.json()
@@ -57,17 +56,24 @@ const useCliente = () => {
       if (!response.ok) {
         throw new Error(`Erro ao cadastrar cliente: ${response.status}`);
       }
-      console.log("Cliente cadastrado com sucesso.");
+      alert("Cliente cadastrado com sucesso.");
     });
   };
 
-
-  const editar = (id: number, cliente: EditarCliente) => {
-    api.put("/cliente/atualizar", cliente);
+  const editar = async (id: number, cliente: EditarCliente) => {
+    const response = await api.put("/cliente/atualizar", cliente);
+    if (response.status === 200) {
+      alert("Editado com sucesso");
+    } else {
+      alert("Erro ao editar");
+    }
   };
 
-  const excluir = (id: number) => {
-    const res = api.delete(`/cliente/excluir`, { data: { id } });
+  const excluir = async (id: number) => {
+    const res = await api.delete(`/cliente/excluir`, { data: { id } });
+    if(res.status === 200){
+      alert("Excluido com sucesso")
+    }
   };
 
   return {
