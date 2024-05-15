@@ -60,9 +60,9 @@ const ClienteCard = ({ cliente, expandido, deletou }: ClienteCardProps) => {
         )}
       </div>
       <div className="flex gap-2">
-        {!expandido ? (<Link to={`/cliente/${cliente.id}`}><button className="p-1 bg-blue-500 rounded-md"> Expandir</button></Link>) : null}
-        <Link to={`/editar/${cliente.id}`}><button className="p-1 bg-yellow-500 rounded-md"> Editar</button></Link>
-        <button onClick={handleDelete} className="p-1 bg-red-500 rounded-md"> Deletar </button>
+        {!expandido ? (<Link to={`/cliente/${cliente.id}`}><button className="p-1 bg-blue-900 rounded-md text-white"> Expandir</button></Link>) : null}
+        <Link to={`/editar/${cliente.id}`}><button className="p-1 bg-green-900 rounded-md text-white"> Editar</button></Link>
+        <button onClick={handleDelete} className="p-1 bg-red-500 rounded-md text-white"> Deletar </button>
       </div>
     </div>
   );

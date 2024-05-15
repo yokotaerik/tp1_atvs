@@ -1,18 +1,16 @@
 import React, { ReactNode } from 'react';
 
 interface LayoutProps {
-    children: ReactNode
+  children: ReactNode
 }
 
 
 function Layout({ children }: LayoutProps) {
   return (
-    <div className="flex flex-col min-h-screen bg-blue-900">
-      <nav className="bg-neutral-200 p-4">
-        <div className="container mx-auto flex justify-between items-center">
-          <h1 className="text-black text-2xl font-semibold">ATV4</h1>
-          <a href="/cadastro">Cadastrar</a>
-          <a href="/">Clientes</a>
+    <div className="flex flex-col min-h-screen bg-gray-100">
+      <nav className="bg-blue-900 p-4">
+        <div className="container mx-auto flex justify-center items-center">
+          <h1 className="text-white text-2xl font-semibold">ATIVIDADE 4 DO GERSON :P</h1>
         </div>
       </nav>
 

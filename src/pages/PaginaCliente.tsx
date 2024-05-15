@@ -10,7 +10,7 @@ const PaginaCliente = () => {
   const { id } = useParams();
   const nav = useNavigate();
 
- 
+
   useEffect(() => {
     const fetchClientes = async () => {
       const clienteData = await listarUm(Number(id));
@@ -20,15 +20,19 @@ const PaginaCliente = () => {
     fetchClientes();
   }, []);
 
-  const voltarPraHome = () =>{
+  const voltarPraHome = () => {
     nav("/")
   }
 
-  
+
 
   return (
     <Layout>
-      {cliente && <ListaDeClientes expandido={true} cliente={cliente} deletou={voltarPraHome}/>}
+      <button
+        className="bg-blue-900 py-2 px-3 rounded-md text-white"
+        onClick={() => nav("/")}
+      > Voltar </button>
+      {cliente && <ListaDeClientes expandido={true} cliente={cliente} deletou={voltarPraHome} />}
     </Layout>
   );
 };

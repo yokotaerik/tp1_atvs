@@ -1,6 +1,7 @@
 import api from "../utils/api";
 import { CriarCliente } from "../pages/clienteFormulario";
 import { EditarCliente } from "../pages/formularioEditarCliente";
+import { useNavigate } from "react-router-dom";
 
 export interface Cliente {
   id: number | null;
@@ -29,6 +30,9 @@ export interface Telefone {
 }
 
 const useCliente = () => {
+
+  let nav = useNavigate();
+
   const listarTodos = async () => {
     const res = await fetch("http://localhost:32831/cliente/clientes").then(
       (res) => res.json()
@@ -57,6 +61,8 @@ const useCliente = () => {
         throw new Error(`Erro ao cadastrar cliente: ${response.status}`);
       }
       alert("Cliente cadastrado com sucesso.");
+      nav("/")
+
     });
   };
 
@@ -64,14 +70,17 @@ const useCliente = () => {
     const response = await api.put("/cliente/atualizar", cliente);
     if (response.status === 200) {
       alert("Editado com sucesso");
+      nav("/")
+
     } else {
       alert("Erro ao editar");
     }
+
   };
 
   const excluir = async (id: number) => {
     const res = await api.delete(`/cliente/excluir`, { data: { id } });
-    if(res.status === 200){
+    if (res.status === 200) {
       alert("Excluido com sucesso")
     }
   };
