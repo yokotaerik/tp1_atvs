@@ -1,12 +1,12 @@
-import { Component } from "react";
+import React from "react";
 import ProdutoServico, { ProdutoServicoProps } from "./produtoServico";
 
-export type produtoServicosConsumidos = {
+type produtoServicosConsumidos = {
   produtoOuServico: ProdutoServicoProps;
   data: Date;
 };
 
-export type ClienteInfoProps = {
+type ClienteInfoProps = {
   nome: string;
   nomeSocial: string;
   cpf: string;
@@ -16,32 +16,38 @@ export type ClienteInfoProps = {
   servicosConsumidos?: produtoServicosConsumidos[];
 };
 
-export default class ClienteInfo extends Component<ClienteInfoProps> {
-  render() {
-    return (
-      <div>
-        <div className="bg-neutral-200 p-5 rounded-lg mb-5 shadow-md">
-          <p className="mb-1">Nome: {this.props.nome}</p>
-          <p className="mb-1">Nome Social: {this.props.nomeSocial}</p>
-          <p className="mb-1">CPF: {this.props.cpf}</p>
-          <p>RGs:</p>
-          {this.props.rg.map((rg, index) => {
-            return (
-              <p key={index} className="mb-1">
-                RG: {rg}
-              </p>
-            );
-          })}
-          <p>Telefones:</p>
-          {this.props.telefone.map((telefone, index) => {
-            return (
-              <p key={index} className="mb-1">
-                {telefone}
-              </p>
-            );
-          })}
-        </div>
+const ClienteInfo: React.FC<ClienteInfoProps> = ({
+  nome,
+  nomeSocial,
+  cpf,
+  rg,
+  telefone,
+}) => {
+  return (
+    <div>
+      <div className="bg-neutral-200 p-5 rounded-lg mb-5 shadow-md">
+        <p className="mb-1">Nome: {nome}</p>
+        <p className="mb-1">Nome Social: {nomeSocial}</p>
+        <p className="mb-1">CPF: {cpf}</p>
+        <p>RGs:</p>
+        {rg.map((rg, index) => {
+          return (
+            <p key={index} className="mb-1">
+              RG: {rg}
+            </p>
+          );
+        })}
+        <p>Telefones:</p>
+        {telefone.map((telefone, index) => {
+          return (
+            <p key={index} className="mb-1">
+              {telefone}
+            </p>
+          );
+        })}
       </div>
-    );
-  }
-}
+    </div>
+  );
+};
+
+export default ClienteInfo;

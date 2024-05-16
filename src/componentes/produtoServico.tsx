@@ -1,4 +1,4 @@
-import { Component } from "react";
+import React from "react";
 
 export interface ProdutoServicoProps {
   id: number;
@@ -8,18 +8,22 @@ export interface ProdutoServicoProps {
   raca: string;
 }
 
-export default class ProdutoServico extends Component<ProdutoServicoProps> {
-  render() {
-    const { id, nome, valor, tipo, raca } = this.props;
+const ProdutoServico: React.FC<ProdutoServicoProps> = ({
+  id,
+  nome,
+  valor,
+  tipo,
+  raca,
+}) => {
+  return (
+    <div className="flex flex-col sm:flex-row gap-4">
+      <p className="text-gray-600">ID: {id}</p>
+      <p className="text-gray-600">Nome: {nome}</p>
+      <p className="text-gray-600">Valor: {valor}</p>
+      <p className="text-gray-600">Tipo: {tipo}</p>
+      <p className="text-gray-600">Raça: {raca}</p>
+    </div>
+  );
+};
 
-    return (
-      <div className="flex flex-col sm:flex-row gap-4">
-        <p className="text-gray-600">ID: {id}</p>
-        <p className="text-gray-600">Nome: {nome}</p>
-        <p className="text-gray-600">Valor: {valor}</p>
-        <p className="text-gray-600">Tipo: {tipo}</p>
-        <p className="text-gray-600">Raça: {raca}</p>
-      </div>
-    );
-  }
-}
+export default ProdutoServico;
