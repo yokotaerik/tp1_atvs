@@ -22,7 +22,7 @@ const ClientesConsumidores = () => {
 
   useEffect(() => {
     fetchClientes();
-  });
+  }, []);
 
   return (
     <Layout>

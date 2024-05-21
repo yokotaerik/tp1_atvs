@@ -11,6 +11,10 @@ const FormularioCadastroServico = () => {
   let nav = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
+    if (!nome || !valor || !tipo || !raca) {
+      alert("Preencha todos os campos");
+      return;
+    }
     e.preventDefault();
     api
       .post("/servico/cadastrar", { nome, valor, tipo, raca })

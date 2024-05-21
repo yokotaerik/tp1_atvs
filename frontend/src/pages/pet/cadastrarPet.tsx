@@ -13,6 +13,10 @@ const FormularioCadastrarPet = () => {
   const [genero, setGenero] = useState("");
 
   const handleSubmit = async () => {
+    if(!nome || !tipo || !raca || !genero) {
+      alert("Preencha todos os campos");
+      return;
+    }
     try {
       const response = await api.post(`/cliente/${id}/pet`, {
         nome,
@@ -26,7 +30,7 @@ const FormularioCadastrarPet = () => {
         setRaca("");
         setGenero("");
         alert("Pet cadastrado com sucesso");
-        nav(`/cliente/${id}`);
+        nav(`/clientes/${id}`);
       }
     } catch (error) {
       console.error(error);

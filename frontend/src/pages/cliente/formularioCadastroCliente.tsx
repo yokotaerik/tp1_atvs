@@ -81,6 +81,10 @@ const FormularioCadastroCliente: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(cliente);
+    if(!cliente.nome || !cliente.cpf.valor || !cliente.cpf.dataEmissao) {
+      alert("Preencha o nome e o CPF");
+      return;
+    }
     try {
       const response = await api.post("/cliente/cadastrar", cliente);
       if (response.status === 201) {

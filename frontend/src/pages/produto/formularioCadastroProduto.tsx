@@ -21,6 +21,10 @@ const FormularioCadastroProduto = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    if (!produto.nome || !produto.valor || !produto.tipo || !produto.raca) {
+      alert("Preencha todos os campos");
+      return;
+    }
     e.preventDefault();
     const sucess = await adicionarProduto(produto.nome, Number(produto.valor), produto.tipo, produto.raca);
     if (sucess) {
