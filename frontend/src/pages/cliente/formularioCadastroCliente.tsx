@@ -81,10 +81,6 @@ const FormularioCadastroCliente: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     console.log(cliente);
-    if(!cliente.nome || !cliente.cpf.valor || !cliente.cpf.dataEmissao) {
-      alert("Preencha o nome e o CPF");
-      return;
-    }
     try {
       const response = await api.post("/cliente/cadastrar", cliente);
       if (response.status === 201) {
@@ -109,6 +105,7 @@ const FormularioCadastroCliente: React.FC = () => {
             Nome:
           </label>
           <input
+            required
             type="text"
             name="nome"
             value={cliente.nome}
@@ -124,6 +121,7 @@ const FormularioCadastroCliente: React.FC = () => {
             Nome Social:
           </label>
           <input
+            required
             type="text"
             name="nomeSocial"
             value={cliente.nomeSocial}
@@ -136,6 +134,7 @@ const FormularioCadastroCliente: React.FC = () => {
             CPF:
           </label>
           <input
+            required
             type="text"
             name="cpf"
             value={cliente.cpf.valor}
@@ -149,6 +148,7 @@ const FormularioCadastroCliente: React.FC = () => {
             Data de Emissão do CPF:
           </label>
           <input
+            required
             type="date"
             name="cpfDataEmissao"
             value={cliente.cpf.dataEmissao}
@@ -166,6 +166,7 @@ const FormularioCadastroCliente: React.FC = () => {
                 RG:
               </label>
               <input
+                required
                 type="text"
                 name="valor"
                 value={rg.valor}
@@ -179,6 +180,7 @@ const FormularioCadastroCliente: React.FC = () => {
                 Data de Emissão do RG:
               </label>
               <input
+                required
                 type="date"
                 name="dataEmissao"
                 value={rg.dataEmissao}
@@ -212,6 +214,7 @@ const FormularioCadastroCliente: React.FC = () => {
                 Telefone:
               </label>
               <input
+                required
                 type="text"
                 name="ddd"
                 placeholder="DDD"
@@ -220,6 +223,7 @@ const FormularioCadastroCliente: React.FC = () => {
                 className="appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
               />
               <input
+                required
                 type="text"
                 name="numero"
                 placeholder="Número"

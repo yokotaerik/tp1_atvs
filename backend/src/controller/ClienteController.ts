@@ -240,7 +240,11 @@ export class ClienteController {
     try {
       const clienteId = Number(req.params.id);
 
-      clienteService.deletarCliente(clienteId);
+      if (!clienteId) {
+        return res.status(400).json({ error: "ID do cliente inválido" });
+      }
+
+      await clienteService.deletarCliente(clienteId);
 
       return res.status(200).json({ message: "Cliente deletado com sucesso" });
     } catch (error) {

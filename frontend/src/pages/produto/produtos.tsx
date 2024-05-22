@@ -27,7 +27,7 @@ const Produtos = () => {
         }
       })
       .catch((error) => {
-        alert("Erro ao deletar produto!");
+        alert("Erro ao deletar produto! Não é possivel deletar produtos que estão registrados a um cliente");
       });
   };
 

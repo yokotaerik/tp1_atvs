@@ -27,7 +27,7 @@ const Servico = () => {
         }
       })
       .catch((error) => {
-        alert("Erro ao deletar serviço!");
+        alert("Erro ao deletar serviço! Não é possivel deletar serviços que estão registrados a um cliente");
       });
   };
 
