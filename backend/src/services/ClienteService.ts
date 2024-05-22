@@ -115,6 +115,10 @@ export class ClienteService {
         await prisma.telefone.deleteMany({
             where: { clienteId },
         });
+        
+        await prisma.pet.deleteMany({
+            where: { clienteId },
+        });
 
         await prisma.rG.deleteMany({
             where: { clienteId },
