@@ -11,6 +11,10 @@ const FormularioCadastroServico = () => {
   let nav = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
+    if(isNaN(Number(valor)) || Number(valor) === 0){
+      alert("Valor inválido");
+      return;
+    }
     if (!nome || !valor || !tipo || !raca) {
       alert("Preencha todos os campos");
       return;

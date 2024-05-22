@@ -21,6 +21,10 @@ const FormularioCadastroProduto = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    if(isNaN(Number(produto.valor)) || Number(produto.valor) === 0){
+      alert("Valor inválido");
+      return;
+    }
     if (!produto.nome || !produto.valor || !produto.tipo || !produto.raca) {
       alert("Preencha todos os campos");
       return;

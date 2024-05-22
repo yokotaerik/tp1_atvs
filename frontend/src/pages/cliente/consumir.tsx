@@ -38,6 +38,7 @@ const Consumir = () => {
 
   const handleProductSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
+    if(quantidadeProdutos === "" || isNaN(Number(quantidadeProdutos))) return alert("Quantidade de produtos inválida");
     try {
       const response = await api.post("/consumir/produto", {
         clienteId: id,
@@ -81,6 +82,8 @@ const Consumir = () => {
               console.log(event.target.value);
               setProdutoSelecionado(event.target.value);
             }}
+            required
+
           >
             <option value="">Selecione um produto</option>
             {produtos &&
@@ -96,6 +99,7 @@ const Consumir = () => {
             placeholder="Quantidade de produtos"
             value={quantidadeProdutos}
             onChange={(event) => setQuantidadeProdutos(event.target.value)}
+            required
           />
           <button
             type="submit"
@@ -112,6 +116,7 @@ const Consumir = () => {
             className="bg-gray-200 py-2 rounded-md"
             value={servicoSelecionado}
             onChange={(event) => setServicoSelecionado(event.target.value)}
+            required
           >
             <option value="">Selecione um serviço</option>
 

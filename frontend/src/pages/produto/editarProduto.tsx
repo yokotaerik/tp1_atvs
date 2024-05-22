@@ -27,6 +27,10 @@ const FormularioEditarProduto = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if(isNaN(Number(valor)) || Number(valor) === 0){
+      alert("Valor inválido");
+      return;
+    }
     atualizarProduto(Number(id), nome, Number(valor), tipo, raca);
   };
 

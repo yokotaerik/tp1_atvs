@@ -26,6 +26,10 @@ const FormularioEditarServico = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if(isNaN(Number(valor)) || Number(valor) === 0){
+      alert("Valor inválido");
+      return;
+    }
     api
       .put(`/servico/${id}`, { nome, valor, tipo, raca })
       .then((response) => {
