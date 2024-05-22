@@ -54,6 +54,7 @@ const FormularioCadastroProduto = () => {
             placeholder="Nome"
             value={produto.nome}
             onChange={handleChange}
+            required
           />
         </div>
         <div>
@@ -66,6 +67,7 @@ const FormularioCadastroProduto = () => {
             placeholder="Valor"
             value={produto.valor}
             onChange={handleChange}
+            required
           />
         </div>
         <div>
@@ -77,6 +79,7 @@ const FormularioCadastroProduto = () => {
             name="tipo"
             placeholder="Tipo"
             value={produto.tipo}
+            required
             onChange={handleChange}
           />
         </div>
@@ -89,6 +92,7 @@ const FormularioCadastroProduto = () => {
             name="raca"
             placeholder="Raça"
             value={produto.raca}
+            required
             onChange={handleChange}
           />
         </div>

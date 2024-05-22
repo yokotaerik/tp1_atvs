@@ -40,6 +40,7 @@ const FormularioCadastroServico = () => {
         <div>
           <label htmlFor="nome">Nome</label>
           <input
+            required
             className="w-full rounded-md p-2"
             type="text"
             id="nome"
@@ -51,6 +52,7 @@ const FormularioCadastroServico = () => {
         <div>
           <label htmlFor="valor">Valor</label>
           <input
+            required
             className="w-full rounded-md p-2"
             type="text"
             id="valor"
@@ -62,6 +64,8 @@ const FormularioCadastroServico = () => {
         <div>
           <label htmlFor="tipo">Tipo</label>
           <input
+            required
+
             className="w-full rounded-md p-2"
             type="text"
             id="tipo"
@@ -73,6 +77,8 @@ const FormularioCadastroServico = () => {
         <div>
           <label htmlFor="raca">Raça</label>
           <input
+            required
+
             className="w-full rounded-md p-2"
             type="text"
             id="raca"

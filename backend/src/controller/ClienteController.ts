@@ -378,6 +378,10 @@ export class ClienteController {
         where: { clienteId },
       });
 
+      await prisma.pet.deleteMany({
+        where: { clienteId },
+      });
+
       // Em seguida, exclua os RGs associados ao cliente
       await prisma.rG.deleteMany({
         where: { clienteId },
