@@ -74,6 +74,7 @@ const Cliente = () => {
                   tipo={pet.tipo}
                   raca={pet.raca}
                   genero={pet.genero}
+                  clienteId={cliente.id}
                 />
               ))
             ) : (

@@ -17,6 +17,7 @@ import {
   createPet,
   deletePetById,
   getPetById,
+  updatePetById,
 } from "./controller/PetController";
 import { ClienteController } from "./controller/ClienteController";
 import { getMelhoresConsumidoresPorQuantidade, getMelhoresConsumidoresPorValor, getProdutosMaisConsumidos, getServicosMaisConsumidos } from "./controller/GerenciamentoController";
@@ -37,7 +38,7 @@ router.post("/consumir/servico", clienteController.consumirServico);
 router.get("/pet/:id", getPetById);
 router.post("/cliente/:id/pet", createPet);
 router.delete("/pet/:id", deletePetById);
-router.put("/pet/:id", deletePetById);
+router.put("/pet/:id", updatePetById);
 // Produtos
 router.get("/produto/produtos", getAllProdutos);
 router.get("/produto/achar/:id", getProdutoById);

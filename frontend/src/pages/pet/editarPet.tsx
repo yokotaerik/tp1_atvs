@@ -9,6 +9,7 @@ const FormularioEditarPet = () => {
   const [tipo, setTipo] = useState("");
   const [raca, setRaca] = useState("");
   const [genero, setGenero] = useState("");
+  const [clienteId, setClienteId] = useState("");
   const { id } = useParams();
   const nav = useNavigate();
   const handleUpdate = () => {
@@ -20,6 +21,8 @@ const FormularioEditarPet = () => {
         genero,
       });
       alert("Pet atualizado com sucesso");
+      nav(`/clientes/${clienteId}`);
+
     } catch {
       alert("Erro ao atualizar o pet");
     }
@@ -35,7 +38,7 @@ const FormularioEditarPet = () => {
         setTipo(petData.tipo);
         setRaca(petData.raca);
         setGenero(petData.genero);
-        nav(`/cliente/${id}`);
+        setClienteId(petData.clienteId);
       } catch (error) {
         alert("Erro ao obter os dados do pet");
       }

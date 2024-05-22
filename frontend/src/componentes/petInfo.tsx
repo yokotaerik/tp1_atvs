@@ -7,9 +7,10 @@ export type PetInfoProps = {
   tipo: string;
   raca: string;
   genero: string;
+  clienteId?: number;
 };
 
-const PetInfo = ({ id, nome, tipo, raca, genero }: PetInfoProps) => {
+const PetInfo = ({ id, nome, tipo, raca, genero, clienteId }: PetInfoProps) => {
   const [isVisible, setIsVisible] = useState(true);
 
   const handleDelete = async () => {
