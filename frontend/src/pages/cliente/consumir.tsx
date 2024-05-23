@@ -1,8 +1,13 @@
 import { useState, useEffect } from "react";
 import Layout from "../../componentes/layout";
-import { ProdutoServicoProps } from "../../utils/interfaces";
+import {
+  ClienteCompletoProps,
+  ClienteCompletoResponse,
+  ProdutoServicoProps,
+} from "../../utils/interfaces";
 import api from "../../utils/api";
 import { useParams } from "react-router-dom";
+import { PetInfoProps } from "./cliente";
 
 const Consumir = () => {
   const [produtos, setProdutos] = useState<ProdutoServicoProps[]>();
@@ -10,13 +15,25 @@ const Consumir = () => {
   const [produtoSelecionado, setProdutoSelecionado] = useState("");
   const [quantidadeProdutos, setQuantidadeProdutos] = useState("");
   const [servicoSelecionado, setServicoSelecionado] = useState("");
+  const [cliente, setCliente] = useState<ClienteCompletoResponse>();
+  const [pet, setPet] = useState("");
 
   const { id } = useParams();
 
   useEffect(() => {
     fetchProducts();
     fetchServices();
+    fetchCliente();
   }, []);
+
+  const fetchCliente = async () => {
+    try {
+      const response = await api.get(`/cliente/achar/${id}`);
+      setCliente(response.data);
+    } catch (error) {
+      alert("Erro ao buscar cliente");
+    }
+  };
 
   const fetchProducts = async () => {
     try {
@@ -38,7 +55,8 @@ const Consumir = () => {
 
   const handleProductSubmit = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
-    if(quantidadeProdutos === "" || isNaN(Number(quantidadeProdutos))) return alert("Quantidade de produtos inválida");
+    if (quantidadeProdutos === "" || isNaN(Number(quantidadeProdutos)))
+      return alert("Quantidade de produtos inválida");
     try {
       const response = await api.post("/consumir/produto", {
         clienteId: id,
@@ -59,6 +77,7 @@ const Consumir = () => {
       const response = await api.post("/consumir/servico", {
         clienteId: Number(id),
         servicoId: Number(servicoSelecionado),
+        petId: Number(pet),
       });
       if (response.status === 200) {
         alert("Serviço adicionado ao cliente com sucesso");
@@ -83,7 +102,6 @@ const Consumir = () => {
               setProdutoSelecionado(event.target.value);
             }}
             required
-
           >
             <option value="">Selecione um produto</option>
             {produtos &&
@@ -95,7 +113,7 @@ const Consumir = () => {
           </select>
           <input
             type="text"
-            className="bg-gray-200 py-2 rounded-md text-end"
+            className="bg-gray-200 py-2 rounded-md text-end px-2"
             placeholder="Quantidade de produtos"
             value={quantidadeProdutos}
             onChange={(event) => setQuantidadeProdutos(event.target.value)}
@@ -119,11 +137,25 @@ const Consumir = () => {
             required
           >
             <option value="">Selecione um serviço</option>
-
             {servicos &&
               servicos.map((servico) => (
                 <option key={servico.id} value={servico.id}>
                   {servico.nome}
+                </option>
+              ))}
+          </select>
+          <select
+            name=""
+            id=""
+            value={pet}
+            onChange={(e) => setPet(e.target.value)}
+            className="bg-gray-200 py-2 rounded-md text-end px-2"
+          >
+            <option value="">Selecione o pet do um cliente</option>
+            {cliente &&
+              cliente.pets.map((pet) => (
+                <option key={pet.id} value={pet.id}>
+                  {pet.nome}
                 </option>
               ))}
           </select>

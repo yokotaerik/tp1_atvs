@@ -5,10 +5,7 @@ import Layout from "../../componentes/layout";
 import ProdutoServico from "../../componentes/produtoServico";
 import api from "../../utils/api";
 import { useParams } from "react-router-dom";
-import {
-  ClienteCompletoProps,
-  ClienteCompletoResponse,
-} from "../../utils/interfaces";
+import { ClienteCompletoResponse } from "../../utils/interfaces";
 
 export type PetInfoProps = {
   id: string;
@@ -102,11 +99,10 @@ const Cliente = () => {
                       tipo={p.produto.tipo}
                       valor={p.produto.valor}
                     />
-                    {/* <p className="text-gray-600"> */}
-                    {/* Data de ocorência: {p.data.toLocaleDateString()} */}
-                    {/* </p> */}
+                    <p className="text-gray-600">Quantidade: {p.quantidade}</p>
                     <p className="text-gray-600">
-                      Consumido: {p.quantidadeDeVezes} vezes
+                      Consumido em:
+                      {new Date(p.dataCompra).toLocaleDateString()}
                     </p>
                   </div>
                 ))}
@@ -124,8 +120,10 @@ const Cliente = () => {
                       tipo={s.servico.tipo}
                       valor={s.servico.valor}
                     />
+                    <p className="text-gray-600">Pet: {s.nomeDoPet}</p>
                     <p className="text-gray-600">
-                      Consumido: {s.servico.vezesConsumidas} vezes
+                      Consumido em:{" "}
+                      {new Date(s.dataContratacao).toLocaleDateString()}
                     </p>
                   </div>
                 ))}

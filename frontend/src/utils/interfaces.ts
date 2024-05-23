@@ -1,3 +1,5 @@
+import { PetInfoProps } from "../componentes/petInfo";
+
 export interface RG {
   valor: string;
   dataEmissao: string; // Alterado para string
@@ -32,10 +34,20 @@ export interface ClienteCompletoResponse {
   cpf: CPF;
   rgs?: RG[];
   telefones?: Telefone[];
+  pets: PetInfoProps[];
   valorConsumido: number
   vezesConsumida: number
-  produtosConsumidos?: any[];
+  produtosConsumidos?: ProdutosConsumidosResponse[];
   servicosConsumidos?: any[];
+}
+
+interface ProdutosConsumidosResponse {
+  id: number;
+  clienteId: number;
+  produtoId: number;
+  quantidade: number;
+  dataCompra: string;
+  produto: ProdutoServicoProps;
 }
 
 export interface FormularioEditarClienteProps {
