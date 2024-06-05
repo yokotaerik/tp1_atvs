@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Layout from "../../componentes/layout";
 import api from "../../utils/api";
 import { useNavigate } from "react-router-dom";
+import isEmptyOrWhitespace from "../../utils/verificador";
 
 const FormularioCadastroServico = () => {
   const [nome, setNome] = useState("");
@@ -11,6 +12,15 @@ const FormularioCadastroServico = () => {
   let nav = useNavigate();
 
   const handleSubmit = (e: React.FormEvent) => {
+    if(
+      !isEmptyOrWhitespace(nome) ||
+      !isEmptyOrWhitespace(valor) ||
+      !isEmptyOrWhitespace(tipo) ||
+      !isEmptyOrWhitespace(raca)
+    ){
+      alert("Preencha todos os campos");
+      return;
+    }
     if(isNaN(Number(valor)) || Number(valor) === 0){
       alert("Valor inválido");
       return;

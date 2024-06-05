@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Layout from "../../componentes/layout";
 import api from "../../utils/api";
+import isEmptyOrWhitespace from "../../utils/verificador";
 
 const FormularioCadastrarPet = () => {
   const { id } = useParams();
@@ -13,7 +14,12 @@ const FormularioCadastrarPet = () => {
   const [genero, setGenero] = useState("");
 
   const handleSubmit = async () => {
-    if(!nome || !tipo || !raca || !genero) {
+    if (
+      !isEmptyOrWhitespace(nome) ||
+      !isEmptyOrWhitespace(genero) ||
+      !isEmptyOrWhitespace(tipo) ||
+      !isEmptyOrWhitespace(raca)
+    ) {
       alert("Preencha todos os campos");
       return;
     }

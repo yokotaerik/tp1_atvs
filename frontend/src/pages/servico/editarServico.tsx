@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../componentes/layout";
 import api from "../../utils/api";
 import { useNavigate, useParams } from "react-router-dom";
+import isEmptyOrWhitespace from "../../utils/verificador";
 
 const FormularioEditarServico = () => {
   const { id } = useParams();
@@ -26,6 +27,15 @@ const FormularioEditarServico = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
+    if(
+      !isEmptyOrWhitespace(nome) ||
+      !isEmptyOrWhitespace(valor) ||
+      !isEmptyOrWhitespace(tipo) ||
+      !isEmptyOrWhitespace(raca)
+    ){
+      alert("Preencha todos os campos");
+      return;
+    }
     if(isNaN(Number(valor)) || Number(valor) === 0){
       alert("Valor inválido");
       return;

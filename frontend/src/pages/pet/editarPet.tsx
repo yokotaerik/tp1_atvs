@@ -3,6 +3,7 @@ import Layout from "../../componentes/layout";
 import axios from "axios";
 import api from "../../utils/api";
 import { useNavigate, useParams } from "react-router-dom";
+import isEmptyOrWhitespace from "../../utils/verificador";
 
 const FormularioEditarPet = () => {
   const [nome, setNome] = useState("");
@@ -13,6 +14,15 @@ const FormularioEditarPet = () => {
   const { id } = useParams();
   const nav = useNavigate();
   const handleUpdate = () => {
+    if(
+      !isEmptyOrWhitespace(nome) ||
+      !isEmptyOrWhitespace(genero) ||
+      !isEmptyOrWhitespace(tipo) ||
+      !isEmptyOrWhitespace(raca)
+    ) {
+      alert("Preencha todos os campos");
+      return;
+    }
     try {
       api.put(`/pet/${id}`, {
         nome,

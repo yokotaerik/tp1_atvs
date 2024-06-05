@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import Layout from "../../componentes/layout";
 import api from "../../utils/api";
 import { useNavigate, useParams } from "react-router-dom";
+import isEmptyOrWhitespace from "../../utils/verificador";
 
 interface RG {
   valor: string;
@@ -26,11 +27,9 @@ interface Cliente {
   telefones: Telefone[];
 }
 
-
 const FormularioCadastroCliente: React.FC = () => {
   const { id } = useParams();
-  let nav = useNavigate()
-
+  let nav = useNavigate();
 
   const [cliente, setCliente] = useState<Cliente>({
     nome: "",
@@ -44,7 +43,6 @@ const FormularioCadastroCliente: React.FC = () => {
     fetchClienteInfo();
   }, []);
 
-
   const fetchClienteInfo = async () => {
     try {
       const response = await api.get(`/cliente/achar/${id}`);
@@ -56,12 +54,11 @@ const FormularioCadastroCliente: React.FC = () => {
           ddd: tel.ddd,
           numero: tel.numero,
         })),
-
-      })
+      });
     } catch (error) {
       alert("Erro ao buscar cliente");
     }
-  }
+  };
 
   const handleChange = (
     event:
@@ -127,13 +124,25 @@ const FormularioCadastroCliente: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(cliente);
+    if (
+      !isEmptyOrWhitespace(cliente.nome) ||
+      !isEmptyOrWhitespace(cliente.nomeSocial) ||
+      !isEmptyOrWhitespace(cliente.cpf.valor) ||
+      !isEmptyOrWhitespace(cliente.cpf.dataEmissao) ||
+      cliente.telefones.length === 0 ||
+      !isEmptyOrWhitespace(cliente.telefones[0].ddd) ||
+      !isEmptyOrWhitespace(cliente.telefones[0].numero) ||
+      !isEmptyOrWhitespace(cliente.rgs[0].valor) ||
+      !isEmptyOrWhitespace(cliente.rgs[0].dataEmissao)
+    ) {
+      alert("Preencha todos os campos");
+      return;
+    }
     try {
       const response = await api.post(`/cliente/editar/${id}`, cliente);
       if (response.status === 200) {
         alert("Cliente editado com sucesso!");
         nav("/clientes");
-
       }
     } catch (error) {
       alert("Erro ao editar cliente");

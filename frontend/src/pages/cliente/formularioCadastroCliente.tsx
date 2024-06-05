@@ -3,6 +3,7 @@ import Layout from "../../componentes/layout";
 import api from "../../utils/api";
 import { CPF, Cliente, Telefone } from "../../utils/interfaces";
 import { useNavigate } from "react-router-dom";
+import isEmptyOrWhitespace from "../../utils/verificador";
 
 
 
@@ -80,7 +81,20 @@ const FormularioCadastroCliente: React.FC = () => {
 
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    console.log(cliente);
+    if (
+      !isEmptyOrWhitespace(cliente.nome) ||
+      !isEmptyOrWhitespace(cliente.nomeSocial) ||
+      !isEmptyOrWhitespace(cliente.cpf.valor) ||
+      !isEmptyOrWhitespace(cliente.cpf.dataEmissao) ||
+      cliente.telefones.length === 0 ||
+      !isEmptyOrWhitespace(cliente.telefones[0].ddd) ||
+      !isEmptyOrWhitespace(cliente.telefones[0].numero) ||
+      !isEmptyOrWhitespace(cliente.rgs[0].valor) ||
+      !isEmptyOrWhitespace(cliente.rgs[0].dataEmissao)
+    ) {
+      alert("Preencha todos os campos");
+      return;
+    }
     try {
       const response = await api.post("/cliente/cadastrar", cliente);
       if (response.status === 201) {

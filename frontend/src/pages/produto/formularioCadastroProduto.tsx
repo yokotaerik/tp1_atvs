@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import Layout from "../../componentes/layout";
 import api from "../../utils/api";
 import useProduto from "../../hooks/useProduto";
+import isEmptyOrWhitespace from "../../utils/verificador";
 
 const FormularioCadastroProduto = () => {
   const { adicionarProduto } = useProduto();
@@ -21,6 +22,15 @@ const FormularioCadastroProduto = () => {
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
+    if(
+      !isEmptyOrWhitespace(produto.nome) ||
+      !isEmptyOrWhitespace(produto.valor) ||
+      !isEmptyOrWhitespace(produto.tipo) ||
+      !isEmptyOrWhitespace(produto.raca)
+    ){
+      alert("Preencha todos os campos");
+      return;
+    }
     if(isNaN(Number(produto.valor)) || Number(produto.valor) === 0){
       alert("Valor inválido");
       return;
