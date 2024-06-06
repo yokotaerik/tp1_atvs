@@ -16,13 +16,13 @@ export default class Home extends Component {
             Clientes
           </a>
           <a
-            href="clientes"
+            href="produto"
             className="block bg-blue-500 text-white px-4 py-2 rounded-md text-center hover:bg-blue-600"
           >
             Produtos
           </a>
           <a
-            href="clientes"
+            href="servico"
             className="block bg-blue-500 text-white px-4 py-2 rounded-md text-center hover:bg-blue-600"
           >
             Serviços
