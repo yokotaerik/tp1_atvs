@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import ClienteInfo, { ClienteInfoProps } from "../../componentes/clienteInfo";
+import ClienteInfo from "../../componentes/clienteInfo";
 import PetInfo from "../../componentes/petInfo";
 import Layout from "../../componentes/layout";
 import ProdutoServico from "../../componentes/produtoServico";
@@ -21,7 +21,7 @@ const Cliente = () => {
     },
   ]);
 
-  const [cliente, setCliente] = useState<ClienteInfoProps>({
+  const [cliente, setCliente] = useState<any>({
     nome: "Erik Camara Yokota",
     nomeSocial: "Jubaluba",
     cpf: "123.456.789-11",
@@ -140,7 +140,7 @@ const Cliente = () => {
           <h3 className="text-3xl font-bold py-4">Produtos consumidos</h3>
           <div className="flex flex-col gap-4">
             {cliente.produtosConsumidos &&
-              cliente.produtosConsumidos.map((p) => (
+              cliente.produtosConsumidos.map((p: any) => (
                 <div className="flex flex-col items-start md:flex-row gap-5 md:items-center bg-neutral-200 p-3 rounded-md shadow-md ">
                   <ProdutoServico
                     id={p.produtoOuServico.id}
@@ -158,7 +158,7 @@ const Cliente = () => {
           <h3 className="text-3xl font-bold  py-4">Serviços consumidos </h3>
           <div className="flex flex-col gap-4">
             {cliente.servicosConsumidos &&
-              cliente.servicosConsumidos.map((p) => (
+              cliente.servicosConsumidos.map((p: any) => (
                 <div className="flex flex-col items-start md:flex-row gap-5 md:items-center bg-neutral-200 p-3 rounded-md shadow-md ">
                   <ProdutoServico
                     id={p.produtoOuServico.id}
