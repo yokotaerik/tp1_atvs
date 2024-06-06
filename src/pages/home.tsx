@@ -28,7 +28,7 @@ export default class Home extends Component {
             Serviços
           </a>
           <a
-            href="cliente/consumidores"
+            href="clientes/consumidores"
             className="block bg-blue-500 text-white px-4 py-2 rounded-md text-center hover:bg-blue-600"
           >
             Listar os clientes que mais consumiram
