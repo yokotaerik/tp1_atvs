@@ -15,10 +15,10 @@ const FormularioCadastrarPet = () => {
 
   const handleSubmit = async () => {
     if (
-      !isEmptyOrWhitespace(nome) ||
-      !isEmptyOrWhitespace(genero) ||
-      !isEmptyOrWhitespace(tipo) ||
-      !isEmptyOrWhitespace(raca)
+      isEmptyOrWhitespace(nome) ||
+      isEmptyOrWhitespace(genero) ||
+      isEmptyOrWhitespace(tipo) ||
+      isEmptyOrWhitespace(raca)
     ) {
       alert("Preencha todos os campos");
       return;

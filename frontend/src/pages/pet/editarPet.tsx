@@ -15,10 +15,10 @@ const FormularioEditarPet = () => {
   const nav = useNavigate();
   const handleUpdate = () => {
     if(
-      !isEmptyOrWhitespace(nome) ||
-      !isEmptyOrWhitespace(genero) ||
-      !isEmptyOrWhitespace(tipo) ||
-      !isEmptyOrWhitespace(raca)
+      isEmptyOrWhitespace(nome) ||
+      isEmptyOrWhitespace(genero) ||
+      isEmptyOrWhitespace(tipo) ||
+      isEmptyOrWhitespace(raca)
     ) {
       alert("Preencha todos os campos");
       return;

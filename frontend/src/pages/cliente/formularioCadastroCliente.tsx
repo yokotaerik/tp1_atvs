@@ -82,15 +82,15 @@ const FormularioCadastroCliente: React.FC = () => {
   const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (
-      !isEmptyOrWhitespace(cliente.nome) ||
-      !isEmptyOrWhitespace(cliente.nomeSocial) ||
-      !isEmptyOrWhitespace(cliente.cpf.valor) ||
-      !isEmptyOrWhitespace(cliente.cpf.dataEmissao) ||
+      isEmptyOrWhitespace(cliente.nome) ||
+      isEmptyOrWhitespace(cliente.nomeSocial) ||
+      isEmptyOrWhitespace(cliente.cpf.valor) ||
+      isEmptyOrWhitespace(cliente.cpf.dataEmissao) ||
       cliente.telefones.length === 0 ||
-      !isEmptyOrWhitespace(cliente.telefones[0].ddd) ||
-      !isEmptyOrWhitespace(cliente.telefones[0].numero) ||
-      !isEmptyOrWhitespace(cliente.rgs[0].valor) ||
-      !isEmptyOrWhitespace(cliente.rgs[0].dataEmissao)
+      isEmptyOrWhitespace(cliente.telefones[0].ddd) ||
+      isEmptyOrWhitespace(cliente.telefones[0].numero) ||
+      isEmptyOrWhitespace(cliente.rgs[0].valor) ||
+      isEmptyOrWhitespace(cliente.rgs[0].dataEmissao)
     ) {
       alert("Preencha todos os campos");
       return;

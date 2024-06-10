@@ -28,10 +28,10 @@ const FormularioEditarServico = () => {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if(
-      !isEmptyOrWhitespace(nome) ||
-      !isEmptyOrWhitespace(valor) ||
-      !isEmptyOrWhitespace(tipo) ||
-      !isEmptyOrWhitespace(raca)
+      isEmptyOrWhitespace(nome) ||
+      isEmptyOrWhitespace(valor) ||
+      isEmptyOrWhitespace(tipo) ||
+      isEmptyOrWhitespace(raca)
     ){
       alert("Preencha todos os campos");
       return;

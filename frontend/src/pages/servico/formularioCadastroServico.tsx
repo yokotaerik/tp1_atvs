@@ -13,10 +13,10 @@ const FormularioCadastroServico = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     if(
-      !isEmptyOrWhitespace(nome) ||
-      !isEmptyOrWhitespace(valor) ||
-      !isEmptyOrWhitespace(tipo) ||
-      !isEmptyOrWhitespace(raca)
+      isEmptyOrWhitespace(nome) ||
+      isEmptyOrWhitespace(valor) ||
+      isEmptyOrWhitespace(tipo) ||
+      isEmptyOrWhitespace(raca)
     ){
       alert("Preencha todos os campos");
       return;

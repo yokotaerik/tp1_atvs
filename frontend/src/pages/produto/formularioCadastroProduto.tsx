@@ -23,10 +23,10 @@ const FormularioCadastroProduto = () => {
 
   const handleSubmit = async (e: React.FormEvent) => {
     if(
-      !isEmptyOrWhitespace(produto.nome) ||
-      !isEmptyOrWhitespace(produto.valor) ||
-      !isEmptyOrWhitespace(produto.tipo) ||
-      !isEmptyOrWhitespace(produto.raca)
+      isEmptyOrWhitespace(produto.nome) ||
+      isEmptyOrWhitespace(produto.valor) ||
+      isEmptyOrWhitespace(produto.tipo) ||
+      isEmptyOrWhitespace(produto.raca)
     ){
       alert("Preencha todos os campos");
       return;
