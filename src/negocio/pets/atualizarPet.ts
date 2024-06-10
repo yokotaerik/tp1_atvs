@@ -53,6 +53,7 @@ export default class AtualizarPet extends Atualizar {
             case 2:
               let raca = this.entrada.receberTexto("Digite a nova raça: ");
               pet.setRaca = raca;
+              break;
             case 3:
               let genero = this.entrada.receberTexto("Digite o novo genero: ");
               pet.setGenero = genero;

@@ -18,6 +18,8 @@ export default class ListagemServico extends Listagem {
       console.log("Id: " + servico.getId)
       console.log(`Nome: ` + servico.getNome);
       console.log(`Valor: ` + servico.getValor.toFixed(2))
+      console.log(`Raça: ` + servico.getRacaDoPet)
+      console.log(`Tipo: ` + servico.getTipoDePet)
       console.log(`--------------------------------------`);
     });
     console.log(`\n`);
