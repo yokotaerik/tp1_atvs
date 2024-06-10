@@ -13,6 +13,9 @@ export default class ListagemPets extends Listagem {
 
   public listar(): void {
     let buscaCliente = new BuscarCliente(this.clientes);
+    this.clientes.forEach((cliente) => {
+      console.log(`ID: ${cliente.id} - Nome: ${cliente.nome}`);
+    });
     let cliente = buscaCliente.buscar();
 
     if (cliente == null) {

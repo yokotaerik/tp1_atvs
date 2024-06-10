@@ -13,6 +13,8 @@ export default class Cliente {
     private rgs: Array<RG>
     private dataCadastro: Date
     private telefones: Array<Telefone>
+    private valorTotalGasto: number
+    private totalDeVezesConsumidas: number
     private produtosConsumidos: Array<Produto>
     private servicosConsumidos: Array<Servico>
     private pets: Array<Pet>
@@ -20,9 +22,11 @@ export default class Cliente {
         this.id = id
         this.nome = nome
         this.nomeSocial = nomeSocial
+        this.dataCadastro = new Date()
+        this.totalDeVezesConsumidas = 0
+        this.valorTotalGasto = 0
         this.cpf = cpf
         this.rgs = []
-        this.dataCadastro = new Date()
         this.telefones = []
         this.produtosConsumidos = []
         this.servicosConsumidos = []
@@ -49,13 +53,23 @@ export default class Cliente {
     public get getPets(): Array<Pet>{
         return this.pets
     }
-
     public set setNome(nome: string){
         this.nome = nome;
     }
-
     public set setNomeSocial(nomeSocial: string){
         this.nomeSocial = nomeSocial;
+    }
+    public get getValorTotalGasto(): number {
+        return this.valorTotalGasto
+    }
+    public get getTotalDeVezesConsumidas(): number {
+        return this.totalDeVezesConsumidas
+    }
+    public set setValorTotalGasto(valorTotalGasto: number) {
+        this.valorTotalGasto = valorTotalGasto
+    }
+    public set setTotalDeVezesConsumidas(totalDeVezesConsumidas: number) {
+        this.totalDeVezesConsumidas = totalDeVezesConsumidas
     }
 
 }

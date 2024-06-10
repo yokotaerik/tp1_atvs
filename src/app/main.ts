@@ -148,29 +148,35 @@ let execucao = true;
 while (execucao) {
   console.log(`Opções:`);
   // Clientes
+  console.log("\n-- Cliente --")
   console.log(`1 - Cadastrar cliente`);
   console.log(`2 - Listar todos os clientes`);
   console.log(`3 - Listar um cliente`);
   console.log(`4 - Atualizar o cliente`);
   console.log(`5 - Deletar um cliente`);
   // Pets
+  console.log("\n -- Pet --")
   console.log(`6 - Cadastrar pet de um cliente`);
   console.log(`7 - Listar pets de um cliente`);
   console.log(`8 - Atualizar o pet`);
   console.log(`9 - Deletar um pet de um cliente`);
+  console.log("\n -- Produto --")
   // Produtos
   console.log("10 - Cadastrar um produto");
   console.log("11 - Listar os produtos");
   console.log("12 - Atualizar o produto");
   console.log("13 - Deletar um produto");
   // Serviços
+  console.log("\n -- Serviço --")
   console.log("14 - Cadastrar um serviço");
   console.log("15 - Listar os serviços");
   console.log("16 - Atualizar o serviço");
   console.log("17 - Deletar um serviço");
   // Operações Especiais
+  console.log("\n -- Consumir --")
   console.log("18 - Adicionar um produto ao cliente");
   console.log("19 - Adicionar um serviço ao cliente");
+  console.log("\n -- Listagens --")
   console.log("20 - Listar os clientes que mais consumiram em valor");
   console.log("21 - Listar os clientes que mais consumiram em quantidade");
   console.log("22 - Listar os produtos e serviços mais consumidos");

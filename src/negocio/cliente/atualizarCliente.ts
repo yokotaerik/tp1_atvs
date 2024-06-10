@@ -47,6 +47,9 @@ export default class AtualizarCliente extends Atualizar {
   }
 
   public atualizar(): void {
+    this.clientes.forEach((cliente) => {
+      console.log(cliente.id + " - " + cliente.nome);
+    });
     let buscarCliente = new BuscarCliente(this.clientes);
     let cliente = buscarCliente.buscar();
 

@@ -14,6 +14,9 @@ export default class AtualizarServico extends Atualizar {
   }
 
   public atualizar(): void {
+    this.servicos.forEach((servico) => {
+        console.log(servico.getId + " - " + servico.getNome);
+      });
     let buscarServico = new BuscaServico(this.servicos);
     let servico = buscarServico.buscar()
 

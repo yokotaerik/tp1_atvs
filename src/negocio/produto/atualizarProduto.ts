@@ -14,6 +14,9 @@ export default class AtualizarProduto extends Atualizar {
   }
 
   public atualizar(): void {
+    this.produtos.forEach((produto) => {
+        console.log(produto.getId + " - " + produto.getNome);
+      });
     let buscarProduto = new BuscaProduto(this.produtos);
     let produto = buscarProduto.buscar()
 

@@ -18,11 +18,17 @@ export default class ConsumirProduto extends Consumir {
   }
 
   public consumir(): void {
+    this.produtos.forEach((produto) => {
+      console.log(produto.getId + " - " + produto.getNome);
+    });
     let produto = new BuscaProduto(this.produtos).buscar();
     if (produto === null) {
       console.log("\n Produto não encontrado. Operação cancelada. \n");
       return;
     }
+    this.clientes.forEach((cliente) => {
+      console.log(cliente.id + " - " + cliente.nome);
+    });
     let cliente = new BuscarCliente(this.clientes).buscar();
     if (cliente == null) {
       console.log("\nCliente não encontrado. Operação cancelada. \n");
@@ -33,6 +39,8 @@ export default class ConsumirProduto extends Consumir {
     );
 
     for (let i = 0; i < quantidade; i++) {
+      cliente.setValorTotalGasto = Number(cliente.getValorTotalGasto) + Number(produto.getValor);
+      cliente.setTotalDeVezesConsumidas += 1;
       cliente.getProdutosConsumidos.push(produto);
     }
 

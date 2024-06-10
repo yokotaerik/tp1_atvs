@@ -13,6 +13,9 @@ export default class DeletarPet extends Deletar {
 
   public deletar(): void {
     let buscaCliente = new BuscarCliente(this.clientes);
+    this.clientes.forEach((cliente) => {
+      console.log(cliente.id + " - " + cliente.nome);
+    });
     let cliente = buscaCliente.buscar();
 
     if (cliente === null) {
@@ -21,7 +24,9 @@ export default class DeletarPet extends Deletar {
     }
 
     let petsDoCliente = cliente.getPets;
-
+    petsDoCliente.forEach((pet) => {
+      console.log(pet.id + " - " + pet.getNome);
+    });
     let buscaPet = new BuscarPet(petsDoCliente);
     let pet = buscaPet.buscar();
 

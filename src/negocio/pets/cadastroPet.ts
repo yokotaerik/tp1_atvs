@@ -15,6 +15,9 @@ export default class CadastroPet extends Cadastro {
   }
 
   public cadastrar(): void {
+    this.clientes.forEach((cliente) => {
+      console.log(`ID: ${cliente.id} - Nome: ${cliente.nome}`);
+    });
     let buscaCliente = new BuscarCliente(this.clientes);
     let cliente = buscaCliente.buscar();
 

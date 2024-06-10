@@ -16,6 +16,9 @@ export default class ListarUmCliente extends Listagem {
     this.entrada = new Entrada();
   }
   public listar(): void {
+    this.clientes.forEach((cliente) => {
+      console.log(cliente.id + " - " + cliente.nome);
+    });
     let buscaCliente = new BuscarCliente(this.clientes);
 
     let cliente = buscaCliente.buscar();

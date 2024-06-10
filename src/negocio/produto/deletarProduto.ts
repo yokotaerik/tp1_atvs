@@ -11,6 +11,9 @@ export default class DeletarProduto extends Deletar {
   }
 
   public deletar(): void {
+    this.produtos.forEach((produto) => {
+      console.log(produto.getId + " - " + produto.getNome);
+    });
     let buscaProduto = new BuscaProduto(this.produtos);
     let produto = buscaProduto.buscar();
 

@@ -14,10 +14,21 @@ export default class AtualizarPet extends Atualizar {
   }
 
   public atualizar(): void {
+    this.clientes.forEach((cliente) => {
+      console.log(cliente.id + " - " + cliente.nome);
+    });
     let cliente = new BuscarCliente(this.clientes).buscar();
 
     if (cliente === null) {
     } else {
+      let petsDoCliente = cliente.getPets;
+      if(petsDoCliente.length === 0){
+        console.log("Cliente não possui pets cadastrados :(");
+        return;
+      }
+      petsDoCliente.forEach((pet) => {
+        console.log(pet.id + " - " + pet.getNome);
+      });
       let pet = new BuscarPet(cliente.getPets).buscar();
 
       if (pet === null) {
@@ -47,11 +58,9 @@ export default class AtualizarPet extends Atualizar {
               pet.setGenero = genero;
               break;
             case 4:
-              let tipo = this.entrada.receberTexto(
-                "Digite o novo tipo: "
-              );
+              let tipo = this.entrada.receberTexto("Digite o novo tipo: ");
               pet.setTipo = tipo;
-              break
+              break;
             case 0:
               execucao = false;
               console.log(`Até mais`);

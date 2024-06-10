@@ -14,6 +14,9 @@ export default class DeletarCliente extends Deletar {
 
   public deletar(): void {
     const buscarCliente = new BuscarCliente(this.clientes)
+    this.clientes.forEach((cliente) => {
+      console.log(cliente.id + " - " + cliente.nome);
+    });
     let cliente = buscarCliente.buscar()
 
     if (cliente === null) {

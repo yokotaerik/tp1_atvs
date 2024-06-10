@@ -11,6 +11,9 @@ export default class DeletarServico extends Deletar {
   }
 
   public deletar(): void {
+    this.servicos.forEach((servico) => {
+      console.log(servico.getId + " - " + servico.getNome);
+    });
     let buscaServico = new BuscaServico(this.servicos);
     let servico = buscaServico.buscar();
 
