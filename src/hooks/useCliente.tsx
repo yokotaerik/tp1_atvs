@@ -30,58 +30,74 @@ export interface Telefone {
 }
 
 const useCliente = () => {
-
   let nav = useNavigate();
 
   const listarTodos = async () => {
-    const res = await fetch("http://localhost:32831/cliente/clientes").then(
-      (res) => res.json()
-    );
-    console.log(res);
-    return res;
+    try {
+      const res = await fetch("http://localhost:32831/cliente/clientes").then(
+        (res) => res.json()
+      );
+      console.log(res);
+      return res;
+    } catch (error) {
+      alert("Erro ao listar todos os clientes");
+    }
   };
 
   const listarUm = async (id: number) => {
-    const res = await fetch(`http://localhost:32831/cliente/${id}`).then(
-      (res) => res.json()
-    );
-    console.log(res);
-    return res;
+    try {
+      const res = await fetch(`http://localhost:32831/cliente/${id}`).then(
+        (res) => res.json()
+      );
+      console.log(res);
+      return res;
+    } catch (error) {
+      alert("Erro ao listar o cliente");
+    }
   };
 
   const cadastrar = (cliente: CriarCliente) => {
-    fetch("http://localhost:32831/cliente/cadastrar", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify(cliente),
-    }).then((response) => {
-      if (!response.ok) {
-        throw new Error(`Erro ao cadastrar cliente: ${response.status}`);
-      }
-      alert("Cliente cadastrado com sucesso.");
-      nav("/")
-
-    });
+    try {
+      fetch("http://localhost:32831/cliente/cadastrar", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(cliente),
+      }).then((response) => {
+        if (!response.ok) {
+          throw new Error(`Erro ao cadastrar cliente: ${response.status}`);
+        }
+        alert("Cliente cadastrado com sucesso.");
+        nav("/");
+      });
+    } catch (error) {
+      alert("Erro ao cadastrar o cliente");
+    }
   };
 
   const editar = async (id: number, cliente: EditarCliente) => {
-    const response = await api.put("/cliente/atualizar", cliente);
-    if (response.status === 200) {
-      alert("Editado com sucesso");
-      nav("/")
-
-    } else {
-      alert("Erro ao editar");
+    try {
+      const response = await api.put("/cliente/atualizar", cliente);
+      if (response.status === 200) {
+        alert("Editado com sucesso");
+        nav("/");
+      } else {
+        alert("Erro ao editar");
+      }
+    } catch (error) {
+      alert("Erro ao editar o cliente");
     }
-
   };
 
   const excluir = async (id: number) => {
-    const res = await api.delete(`/cliente/excluir`, { data: { id } });
-    if (res.status === 200) {
-      alert("Excluido com sucesso")
+    try {
+      const res = await api.delete(`/cliente/excluir`, { data: { id } });
+      if (res.status === 200) {
+        alert("Excluído com sucesso");
+      }
+    } catch (error) {
+      alert("Erro ao excluir o cliente");
     }
   };
 
