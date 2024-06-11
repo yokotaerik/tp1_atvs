@@ -84,11 +84,11 @@ const FormularioCadastroCliente: React.FC = () => {
     if (
       isEmptyOrWhitespace(cliente.nome) ||
       isEmptyOrWhitespace(cliente.nomeSocial) ||
-      isEmptyOrWhitespace(cliente.cpf.valor) ||
-      isEmptyOrWhitespace(cliente.cpf.dataEmissao) ||
+      cliente.cpf == null || cliente.cpf == undefined ||
       cliente.telefones.length === 0 ||
       isEmptyOrWhitespace(cliente.telefones[0].ddd) ||
       isEmptyOrWhitespace(cliente.telefones[0].numero) ||
+      cliente.rgs.length === 0 ||
       isEmptyOrWhitespace(cliente.rgs[0].valor) ||
       isEmptyOrWhitespace(cliente.rgs[0].dataEmissao)
     ) {

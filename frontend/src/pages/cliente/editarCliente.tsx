@@ -127,16 +127,21 @@ const FormularioCadastroCliente: React.FC = () => {
     if (
       isEmptyOrWhitespace(cliente.nome) ||
       isEmptyOrWhitespace(cliente.nomeSocial) ||
-      isEmptyOrWhitespace(cliente.cpf.valor) ||
-      isEmptyOrWhitespace(cliente.cpf.dataEmissao) ||
       cliente.telefones.length === 0 ||
       isEmptyOrWhitespace(cliente.telefones[0].ddd) ||
-      isEmptyOrWhitespace(cliente.telefones[0].numero) ||
-      isEmptyOrWhitespace(cliente.rgs[0].valor) ||
-      isEmptyOrWhitespace(cliente.rgs[0].dataEmissao)
+      isEmptyOrWhitespace(cliente.telefones[0].numero)
     ) {
       alert("Preencha todos os campos");
       return;
+    }
+    if (cliente.rgs.length >= 1) {
+      if (
+        isEmptyOrWhitespace(cliente.rgs[0].valor) ||
+        isEmptyOrWhitespace(cliente.rgs[0].dataEmissao)
+      ) {
+        alert("Preencha todos os campos");
+        return;
+      }
     }
     try {
       const response = await api.post(`/cliente/editar/${id}`, cliente);
