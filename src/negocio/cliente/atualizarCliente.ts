@@ -85,6 +85,12 @@ export default class AtualizarCliente extends Atualizar {
             this.cadastrarTelefones(cliente);
             break;
           case 5:
+            console.log("Telefones do cliente: ");
+            cliente.getTelefones.forEach((telefone) => {
+              console.log(
+                `ID: ${telefone.getId} - ${telefone.getDdd} ${telefone.getNumero}`
+              );
+            });
             let idRemoverTelefone = this.entrada.receberNumero(
               "Digite o ID do telefone: "
             );

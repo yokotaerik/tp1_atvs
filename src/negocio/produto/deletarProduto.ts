@@ -26,8 +26,10 @@ export default class DeletarProduto extends Deletar {
     if (index !== -1) {
       this.produtos.splice(index, 1);
       console.log("\n Produto deletado!\n");
+      return
     } else {
       console.log("\nErro ao deletar o Produto.\n");
+      return 
     }
   }
 }
