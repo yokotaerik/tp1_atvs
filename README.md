@@ -10,6 +10,6 @@
   Ajuste sua senha do mysql no arquivo prisma
    ``` bash
   npm i
-  npm db push
+  npx prisma db push
   npm run dev
   ```
