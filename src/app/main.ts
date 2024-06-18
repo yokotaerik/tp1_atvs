@@ -258,7 +258,7 @@ while (execucao) {
       break;
     case 0:
       execucao = false;
-      console.log(`Até mais!`);
+      console.log(`Programa finalizado!`);
       break;
     default:
       console.log(`Operação não entendida :(`);

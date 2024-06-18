@@ -54,7 +54,6 @@ export default class AtualizarServico extends Atualizar {
                 break
             case 0:
                 execucao = false;
-                console.log(`Até mais`);
                 break;
             default:
                 console.log(`Operação não entendida :(`);
