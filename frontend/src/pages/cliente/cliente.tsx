@@ -97,7 +97,6 @@ const Cliente = () => {
                       nome={p.produto.nome}
                       raca={p.produto.raca}
                       tipo={p.produto.tipo}
-                      valor={p.produto.valor}
                     />
                     <p className="text-gray-600">Quantidade: {p.quantidade}</p>
                     <p className="text-gray-600">
@@ -118,7 +117,6 @@ const Cliente = () => {
                       nome={s.servico.nome}
                       raca={s.servico.raca}
                       tipo={s.servico.tipo}
-                      valor={s.servico.valor}
                     />
                     <p className="text-gray-600">Pet: {s.nomeDoPet}</p>
                     <p className="text-gray-600">

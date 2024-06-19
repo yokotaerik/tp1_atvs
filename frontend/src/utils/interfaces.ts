@@ -62,7 +62,7 @@ export interface FormularioEditarClienteProps {
 export interface ProdutoServicoProps {
   id: number;
   nome: string;
-  valor: number;
+  valor?: number;
   tipo: string;
   raca: string;
 }

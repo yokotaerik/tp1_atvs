@@ -87,8 +87,6 @@ model ClienteProduto {
   produtoId  Int
   quantidade Int
   dataCompra DateTime @default(now())
-
-  @@unique([clienteId, produtoId])
 }
 
 
@@ -100,6 +98,4 @@ model ClienteServico {
   servicoId       Int
   nomeDoPet       String 
   dataContratacao DateTime @default(now())
-
-  @@unique([clienteId, servicoId])
 }
